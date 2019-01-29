@@ -1,0 +1,6 @@
+framework module CYBSMposKit {
+  umbrella header "CYBSMposKit.h"
+
+  export *
+  module * { export * }
+}
