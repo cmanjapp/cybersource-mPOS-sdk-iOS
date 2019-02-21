@@ -33,6 +33,9 @@ manager.updateSettings()
 ```
 // Objective-C
 CYBSMposManager *manager = [CYBSMposManager sharedInstance];
+CYBSMposSettings *settings = [[CYBSMposSettings alloc] initWithEnvironment:CYBSMposEnvironmentLive deviceID:"deviceId"];
+manager.settings = settings;
+[manager updateSettings];
 ```
 
 
