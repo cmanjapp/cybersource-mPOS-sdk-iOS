@@ -26,6 +26,9 @@ in *Objective-C*.
 ```
 // Swift
 let manager = CYBSMposManager.sharedInstance()
+let settings = CYBSMposSettings(environment: .live, deviceID: deviceID)
+manager.settings = settings
+manager.updateSettings()
 ```
 ```
 // Objective-C
