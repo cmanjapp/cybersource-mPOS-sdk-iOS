@@ -23,7 +23,8 @@ typedef NS_ENUM(NSUInteger, CYBSMposTransactionActionType) {
   CYBSMposTransactionActionTypeRefund       = 1 << 1,
   CYBSMposTransactionActionTypeReverse      = 1 << 2,
   CYBSMposTransactionActionTypeVoid         = 1 << 3,
-  CYBSMposTransactionActionTypeSendReceipt  = 1 << 4
+  CYBSMposTransactionActionTypeSendReceipt  = 1 << 4,
+  CYBSMposTransactionActionTypePartialRefund = 1 << 5
 };
 
 @class CYBSMposTransactionPaymentInfo;

@@ -28,8 +28,12 @@ class OTAViewController: UIViewController, CYBSMposManagerDelegate {
         spinner.center = view.center;
         view.addSubview(spinner)
         spinner.hidesWhenStopped = true
-        
-        self.isTestReader = self.environmentSwitch.isOn
+        if(Settings.getEnvironment() == 0) {
+            self.isTestReader = false
+        }
+        else {
+            self.isTestReader = true
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {

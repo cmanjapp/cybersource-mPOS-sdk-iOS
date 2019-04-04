@@ -36,8 +36,8 @@ class TransactionDetailTableViewController: UITableViewController, CYBSMposManag
     let numberOfRowsInSection = [12, 7, 0, 0, 1]
     let actions: [CYBSMposTransactionType: [CYBSMposTransactionActionType]] = [
     .authorization: [.sendReceipt, .capture, .reverse],
-    .capture: [.sendReceipt, .void, .refund],
-    .sale: [.sendReceipt, .void, .refund],
+    .capture: [.sendReceipt, .void, .refund, .partialRefund],
+    .sale: [.sendReceipt, .void, .refund, .partialRefund],
     .refund: [.void]
   ]
 
@@ -85,11 +85,13 @@ class TransactionDetailTableViewController: UITableViewController, CYBSMposManag
   }
 
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.section == 4 {
-            return 100
-        } else {
-            return 44
-        }
+//        if indexPath.section == 4 {
+//            return 100
+//        } else {
+//            return 44
+//        }
+        
+        return UITableViewAutomaticDimension
     }
 
   override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -114,87 +116,87 @@ class TransactionDetailTableViewController: UITableViewController, CYBSMposManag
 
   func createTransactionInfoCell(_ indexPath: IndexPath) -> UITableViewCell {
 
-    let cell = tableView.dequeueReusableCell(withIdentifier: "TransactionDetailCell", for: indexPath)
+    let cell = tableView.dequeueReusableCell(withIdentifier: "TransactionDetailCell", for: indexPath) as! DetailCell
 
-    cell.detailTextLabel!.text = ""
+    cell.detailLabel!.text = ""
 
     switch (indexPath as NSIndexPath).row {
     case 0:
-      cell.textLabel!.text = "Transaction ID"
+      cell.titleLabel!.text = "Transaction ID"
       if let transaction = self.transaction {
-        cell.detailTextLabel!.text = transaction.transactionID
+        cell.detailLabel!.text = transaction.transactionID
       }
     case 1:
-      cell.textLabel!.text = "Transaction Date"
+      cell.titleLabel!.text = "Transaction Date"
       if let transaction = self.transaction {
-        cell.detailTextLabel!.text = dateFormatter.string(from: transaction.transactionDate)
+        cell.detailLabel!.text = dateFormatter.string(from: transaction.transactionDate)
       }
     case 2:
-      cell.textLabel!.text = "Transaction Type"
+      cell.titleLabel!.text = "Transaction Type"
       if let transaction = self.transaction {
         switch (transaction.transactionType) {
         case .authorization:
-          cell.detailTextLabel!.text = "Authorization"
+          cell.detailLabel!.text = "Authorization"
         case .capture:
-          cell.detailTextLabel!.text = "Capture"
+          cell.detailLabel!.text = "Capture"
         case .sale:
-          cell.detailTextLabel!.text = "Sale"
+          cell.detailLabel!.text = "Sale"
         case .refund:
-          cell.detailTextLabel!.text = "Refund"
+          cell.detailLabel!.text = "Refund"
         case .reversal:
-          cell.detailTextLabel!.text = "Reversal"
+          cell.detailLabel!.text = "Reversal"
         case .void:
-          cell.detailTextLabel!.text = "Void"
+          cell.detailLabel!.text = "Void"
         case .metadata:
-          cell.detailTextLabel!.text = "Metadata"
+          cell.detailLabel!.text = "Metadata"
         default:
-          cell.detailTextLabel!.text = "Undefined"
+          cell.detailLabel!.text = "Undefined"
         }
       }
     case 3:
-      cell.textLabel!.text = "Currency"
+      cell.titleLabel!.text = "Currency"
       if let transaction = self.transaction {
-        cell.detailTextLabel!.text = transaction.currency
+        cell.detailLabel!.text = transaction.currency
       }
     case 4:
-      cell.textLabel!.text = "Amount"
+      cell.titleLabel!.text = "Amount"
       if let amount = self.transaction?.amount {
-        cell.detailTextLabel!.text = NSString(format:"%@%.2f", getCurrencySymbol(code: self.transaction?.currency ?? "USD"), amount.doubleValue) as String
+        cell.detailLabel!.text = NSString(format:"%@%.2f", getCurrencySymbol(code: self.transaction?.currency ?? "USD"), amount.doubleValue) as String
       }
     case 5:
-      cell.textLabel!.text = "Merchant Reference Code"
+      cell.titleLabel!.text = "Merchant Reference Code"
       if let transaction = self.transaction {
-        cell.detailTextLabel!.text = transaction.merchantReferenceCode
+        cell.detailLabel!.text = transaction.merchantReferenceCode
       }
     case 6:
-      cell.textLabel!.text = "Transaction Reference No"
+      cell.titleLabel!.text = "Transaction Reference No"
       if let transaction = self.transaction {
-        cell.detailTextLabel!.text = transaction.transRefNo
+        cell.detailLabel!.text = transaction.transRefNo
       }
     case 7:
-      cell.textLabel!.text = "Authorization Code"
+      cell.titleLabel!.text = "Authorization Code"
       if let transaction = self.transaction {
-        cell.detailTextLabel!.text = transaction.authCode
+        cell.detailLabel!.text = transaction.authCode
       }
     case 8:
-      cell.textLabel!.text = "Reason Code"
+      cell.titleLabel!.text = "Reason Code"
       if let transaction = self.transaction , transaction.reasonCode != 0 {
-        cell.detailTextLabel!.text = String(transaction.reasonCode)
+        cell.detailLabel!.text = String(transaction.reasonCode)
       }
     case 9:
-      cell.textLabel!.text = "Reply Message"
+      cell.titleLabel!.text = "Reply Message"
       if let transaction = self.transaction {
-        cell.detailTextLabel!.text = transaction.replyMessage
+        cell.detailLabel!.text = transaction.replyMessage
       }
     case 10:
-      cell.textLabel!.text = "Request Token"
+      cell.titleLabel!.text = "Request Token"
       if let transaction = self.transaction {
-        cell.detailTextLabel!.text = transaction.requestToken
+        cell.detailLabel!.text = transaction.requestToken
       }
     case 11:
-      cell.textLabel!.text = "Status"
+      cell.titleLabel!.text = "Status"
       if let transaction = self.transaction {
-        cell.detailTextLabel!.text = transaction.status
+        cell.detailLabel!.text = transaction.status
       }
     default:
       break
@@ -205,45 +207,45 @@ class TransactionDetailTableViewController: UITableViewController, CYBSMposManag
 
   func createPaymentInfoCell(_ indexPath: IndexPath) -> UITableViewCell {
 
-    let cell = tableView.dequeueReusableCell(withIdentifier: "TransactionDetailCell", for: indexPath)
+    let cell = tableView.dequeueReusableCell(withIdentifier: "TransactionDetailCell", for: indexPath) as! DetailCell
 
-    cell.detailTextLabel!.text = ""
+    cell.detailLabel!.text = ""
 
     switch (indexPath as NSIndexPath).row {
     case 0:
-      cell.textLabel!.text = "Payment Type"
+      cell.titleLabel!.text = "Payment Type"
       if let paymentInfo = self.transaction?.paymentInfo {
-        cell.detailTextLabel!.text = paymentInfo.paymentType
+        cell.detailLabel!.text = paymentInfo.paymentType
       }
     case 1:
-      cell.textLabel!.text = "Full Name"
+      cell.titleLabel!.text = "Full Name"
       if let paymentInfo = self.transaction?.paymentInfo {
-        cell.detailTextLabel!.text = paymentInfo.fullName
+        cell.detailLabel!.text = paymentInfo.fullName
       }
     case 2:
-      cell.textLabel!.text = "Account Suffix"
+      cell.titleLabel!.text = "Account Suffix"
       if let paymentInfo = self.transaction?.paymentInfo {
-        cell.detailTextLabel!.text = paymentInfo.accountSuffix
+        cell.detailLabel!.text = paymentInfo.accountSuffix
       }
     case 3:
-      cell.textLabel!.text = "Expiration Month"
+      cell.titleLabel!.text = "Expiration Month"
       if let paymentInfo = self.transaction?.paymentInfo {
-        cell.detailTextLabel!.text = paymentInfo.expirationMonth
+        cell.detailLabel!.text = paymentInfo.expirationMonth
       }
     case 4:
-      cell.textLabel!.text = "Expiration Year"
+      cell.titleLabel!.text = "Expiration Year"
       if let paymentInfo = self.transaction?.paymentInfo {
-        cell.detailTextLabel!.text = paymentInfo.expirationYear
+        cell.detailLabel!.text = paymentInfo.expirationYear
       }
     case 5:
-      cell.textLabel!.text = "Card Type"
+      cell.titleLabel!.text = "Card Type"
       if let paymentInfo = self.transaction?.paymentInfo {
-        cell.detailTextLabel!.text = paymentInfo.cardType
+        cell.detailLabel!.text = paymentInfo.cardType
       }
     case 6:
-      cell.textLabel!.text = "Processor"
+      cell.titleLabel!.text = "Processor"
       if let paymentInfo = self.transaction?.paymentInfo {
-        cell.detailTextLabel!.text = paymentInfo.processor
+        cell.detailLabel!.text = paymentInfo.processor
       }
     default:
       break
@@ -362,6 +364,10 @@ class TransactionDetailTableViewController: UITableViewController, CYBSMposManag
       cell.button.setTitle("Send Receipt", for: UIControlState())
       cell.button.isEnabled = canSendReceipt()
       cell.button.tag = Int(CYBSMposTransactionActionType.sendReceipt.rawValue)
+    case .partialRefund:
+        cell.button.setTitle("Partial Refund", for: UIControlState())
+        cell.button.isEnabled = canRefund()
+        cell.button.tag = Int(CYBSMposTransactionActionType.partialRefund.rawValue)
     default:
       break
     }
@@ -527,7 +533,6 @@ class TransactionDetailTableViewController: UITableViewController, CYBSMposManag
                 let merchantID = Settings.sharedInstance.merchantID ?? ""
                 
                 let manager = Utils.getManager()
-                
                 let captureRequest = CYBSMposCaptureRequest(merchantID: merchantID, accessToken: accessToken!,
                                                           merchantReferenceCode: self.transaction!.merchantReferenceCode!, transactionID: self.transaction!.transactionID,
                                                           currency: self.transaction!.currency!, amount: self.transaction!.amount!)
@@ -593,6 +598,44 @@ class TransactionDetailTableViewController: UITableViewController, CYBSMposManag
     self.present(alertController, animated: true) {
     }
   }
+    
+    func decimal(with string: String) -> NSDecimalNumber {
+        let formatter = NumberFormatter()
+        formatter.generatesDecimalNumbers = true
+        return formatter.number(from: string) as? NSDecimalNumber ?? 0
+    }
+    
+    func partialRefund() {
+            let alertController = UIAlertController(title: "Partial Refund",
+                                                    message: "Enter the amount for partial refund",
+                                                    preferredStyle: .alert)
+            alertController.addTextField(configurationHandler: { (textField) in
+                textField.placeholder = "Amount"
+                textField.keyboardType = .decimalPad
+            })
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (action) in
+            }
+            alertController.addAction(cancelAction)
+            let doneAction = UIAlertAction(title: "Done", style: .default) { (action) in
+                Utils.createAccessToken { (accessToken, error) in
+                    if (error != nil) {
+                        self.spinner.stopAnimating()
+                    }
+                    let merchantID = Settings.sharedInstance.merchantID ?? ""
+                    let manager = Utils.getManager()
+                    let amount = self.decimal(with: alertController.textFields![0].text!)
+
+                    let refundRequest = CYBSMposRefundRequest(merchantID: merchantID, accessToken: accessToken!,
+                                                              merchantReferenceCode: self.transaction!.merchantReferenceCode!, transactionID: self.transaction!.transactionID,
+                                                              currency: self.transaction!.currency!, amount: amount)
+                    
+                    manager.performRefund(refundRequest, delegate: self)
+                }
+            }
+            alertController.addAction(doneAction)
+            self.present(alertController, animated: true) {
+            }
+    }
 
   func void() {
     self.spinner.startAnimating()
@@ -821,6 +864,9 @@ class TransactionDetailTableViewController: UITableViewController, CYBSMposManag
         capture()
     } else if button.tag == Int(CYBSMposTransactionActionType.reverse.rawValue) {
         authorizationReversal()
+    }
+    else if button.tag == Int(CYBSMposTransactionActionType.partialRefund.rawValue) {
+        partialRefund()
     }
   }
 

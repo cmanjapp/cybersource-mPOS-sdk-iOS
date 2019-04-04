@@ -1,0 +1,22 @@
+{
+    "CAS" :
+    [
+        {
+            "Store_Name" : "store1",
+            "CyberSource_MID": "<TBD>",
+            "Device_ID": "<TBD>",
+            "Client_ID": "<TBD>",
+            "Terminal_ID": ""
+        }
+    ],
+    "LIVE" :
+    [
+        {
+            "Store_Name" : "store1",
+            "CyberSource_MID": "<TBD>",
+            "Device_ID": "<TBD>",
+            "Client_ID": "<TBD>",
+            "Terminal_ID": ""
+        }
+    ]
+}

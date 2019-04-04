@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2E07D88F2227EA7200A3FEBF /* AboutWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E07D88E2227EA7200A3FEBF /* AboutWebViewController.swift */; };
 		46BE7BF1204E0B4E0067A475 /* ExternalAccessory.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46BE7BEF204E0AD20067A475 /* ExternalAccessory.framework */; };
 		46BE7BFF204E15D90067A475 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46BE7BFE204E15D90067A475 /* AudioToolbox.framework */; };
 		46BE7C01204E15E70067A475 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46BE7C00204E15E70067A475 /* CoreAudio.framework */; };
@@ -30,6 +31,15 @@
 		989BA9221D63BF4100DE2A0C /* PlaceOrderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 989BA9211D63BF4100DE2A0C /* PlaceOrderView.swift */; };
 		98AE00831D4A6AC0007ACA49 /* HistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AE00821D4A6AC0007ACA49 /* HistoryTableViewCell.swift */; };
 		98DC5C831D480591008C5334 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98DC5C821D480591008C5334 /* Utils.swift */; };
+		A0044C902228EDBC00329077 /* StoresConfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = A0044C872228EDBC00329077 /* StoresConfiguration.json */; };
+		A0044C912228EDBC00329077 /* CYBSDropDownConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0044C892228EDBC00329077 /* CYBSDropDownConstants.swift */; };
+		A0044C922228EDBC00329077 /* CYBSDropDownCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0044C8A2228EDBC00329077 /* CYBSDropDownCell.swift */; };
+		A0044C932228EDBC00329077 /* CYBSDropDownUIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0044C8B2228EDBC00329077 /* CYBSDropDownUIView+Extension.swift */; };
+		A0044C942228EDBC00329077 /* CYBSKeyboardListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0044C8C2228EDBC00329077 /* CYBSKeyboardListener.swift */; };
+		A0044C952228EDBC00329077 /* CYBSDropDown+Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0044C8D2228EDBC00329077 /* CYBSDropDown+Appearance.swift */; };
+		A0044C962228EDBC00329077 /* CYBSDropDown.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0044C8E2228EDBC00329077 /* CYBSDropDown.swift */; };
+		A0044C972228EDBC00329077 /* CYBSDropDownCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A0044C8F2228EDBC00329077 /* CYBSDropDownCell.xib */; };
+		A0044C992228F97D00329077 /* DeviceManagementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0044C982228F97D00329077 /* DeviceManagementViewController.swift */; };
 		A0259B6F219AA58B00C0531E /* BaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0259B6E219AA58B00C0531E /* BaseCell.swift */; };
 		A0259B71219AA6E100C0531E /* ItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0259B70219AA6E100C0531E /* ItemCell.swift */; };
 		A0259B81219B2DC600C0531E /* TradeGothicLTStd-Bd2.otf in Resources */ = {isa = PBXBuildFile; fileRef = A0259B73219B2D9600C0531E /* TradeGothicLTStd-Bd2.otf */; };
@@ -47,10 +57,14 @@
 		A0259B8D219B2DC600C0531E /* TradeGothicLTStd-Obl.otf in Resources */ = {isa = PBXBuildFile; fileRef = A0259B7F219B2D9600C0531E /* TradeGothicLTStd-Obl.otf */; };
 		A0259B8E219B2DC600C0531E /* TradeGothicLTStd.otf in Resources */ = {isa = PBXBuildFile; fileRef = A0259B80219B2D9600C0531E /* TradeGothicLTStd.otf */; };
 		A06AB28121B52126001D343E /* AddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06AB28021B52126001D343E /* AddressViewController.swift */; };
+		A0743C02224DE6DB000743B3 /* SegmentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0743BFD224DE6DB000743B3 /* SegmentCell.swift */; };
+		A0743C03224DE6DB000743B3 /* DetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0743BFE224DE6DB000743B3 /* DetailCell.swift */; };
+		A0743C04224DE6DB000743B3 /* TextFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0743BFF224DE6DB000743B3 /* TextFieldCell.swift */; };
+		A0743C06224DE6DB000743B3 /* SwitchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0743C01224DE6DB000743B3 /* SwitchCell.swift */; };
+		A0743C08224DE751000743B3 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A0743C07224DE751000743B3 /* Settings.storyboard */; };
 		A0DD8EA3218B3B6D009D66C3 /* TransactionSignatureCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0DD8EA2218B3B6D009D66C3 /* TransactionSignatureCell.swift */; };
 		A0DD8EAC218B4A03009D66C3 /* OTAViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0DD8EA0218B3B54009D66C3 /* OTAViewController.swift */; };
 		F8A39B7E20D32778008E7E0E /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A39B7D20D32778008E7E0E /* SettingsViewController.swift */; };
-		F8B3156820FD64EE00509181 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F8B3156720FD64ED00509181 /* Settings.storyboard */; };
 		F8C6BC6A21FE9B6100A3ADA0 /* CYBSMposKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8C6BC6921FE9B6100A3ADA0 /* CYBSMposKit.framework */; };
 		F8C6BC6B21FE9B6100A3ADA0 /* CYBSMposKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F8C6BC6921FE9B6100A3ADA0 /* CYBSMposKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
@@ -70,6 +84,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2E07D88E2227EA7200A3FEBF /* AboutWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutWebViewController.swift; sourceTree = "<group>"; };
 		46BE7BEF204E0AD20067A475 /* ExternalAccessory.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ExternalAccessory.framework; path = System/Library/Frameworks/ExternalAccessory.framework; sourceTree = SDKROOT; };
 		46BE7BFE204E15D90067A475 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		46BE7C00204E15E70067A475 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
@@ -97,6 +112,15 @@
 		989BA9211D63BF4100DE2A0C /* PlaceOrderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceOrderView.swift; sourceTree = "<group>"; };
 		98AE00821D4A6AC0007ACA49 /* HistoryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryTableViewCell.swift; sourceTree = "<group>"; };
 		98DC5C821D480591008C5334 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		A0044C872228EDBC00329077 /* StoresConfiguration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = StoresConfiguration.json; sourceTree = "<group>"; };
+		A0044C892228EDBC00329077 /* CYBSDropDownConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CYBSDropDownConstants.swift; sourceTree = "<group>"; };
+		A0044C8A2228EDBC00329077 /* CYBSDropDownCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CYBSDropDownCell.swift; sourceTree = "<group>"; };
+		A0044C8B2228EDBC00329077 /* CYBSDropDownUIView+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CYBSDropDownUIView+Extension.swift"; sourceTree = "<group>"; };
+		A0044C8C2228EDBC00329077 /* CYBSKeyboardListener.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CYBSKeyboardListener.swift; sourceTree = "<group>"; };
+		A0044C8D2228EDBC00329077 /* CYBSDropDown+Appearance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CYBSDropDown+Appearance.swift"; sourceTree = "<group>"; };
+		A0044C8E2228EDBC00329077 /* CYBSDropDown.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CYBSDropDown.swift; sourceTree = "<group>"; };
+		A0044C8F2228EDBC00329077 /* CYBSDropDownCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CYBSDropDownCell.xib; sourceTree = "<group>"; };
+		A0044C982228F97D00329077 /* DeviceManagementViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceManagementViewController.swift; sourceTree = "<group>"; };
 		A0259B6E219AA58B00C0531E /* BaseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCell.swift; sourceTree = "<group>"; };
 		A0259B70219AA6E100C0531E /* ItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCell.swift; sourceTree = "<group>"; };
 		A0259B73219B2D9600C0531E /* TradeGothicLTStd-Bd2.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "TradeGothicLTStd-Bd2.otf"; sourceTree = "<group>"; };
@@ -114,10 +138,14 @@
 		A0259B7F219B2D9600C0531E /* TradeGothicLTStd-Obl.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "TradeGothicLTStd-Obl.otf"; sourceTree = "<group>"; };
 		A0259B80219B2D9600C0531E /* TradeGothicLTStd.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = TradeGothicLTStd.otf; sourceTree = "<group>"; };
 		A06AB28021B52126001D343E /* AddressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressViewController.swift; sourceTree = "<group>"; };
+		A0743BFD224DE6DB000743B3 /* SegmentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentCell.swift; sourceTree = "<group>"; };
+		A0743BFE224DE6DB000743B3 /* DetailCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailCell.swift; sourceTree = "<group>"; };
+		A0743BFF224DE6DB000743B3 /* TextFieldCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldCell.swift; sourceTree = "<group>"; };
+		A0743C01224DE6DB000743B3 /* SwitchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwitchCell.swift; sourceTree = "<group>"; };
+		A0743C07224DE751000743B3 /* Settings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
 		A0DD8EA0218B3B54009D66C3 /* OTAViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OTAViewController.swift; sourceTree = "<group>"; };
 		A0DD8EA2218B3B6D009D66C3 /* TransactionSignatureCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionSignatureCell.swift; sourceTree = "<group>"; };
 		F8A39B7D20D32778008E7E0E /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
-		F8B3156720FD64ED00509181 /* Settings.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
 		F8C6BC6921FE9B6100A3ADA0 /* CYBSMposKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CYBSMposKit.framework; path = ../Framework/universal/CYBSMposKit.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -195,11 +223,37 @@
 				46D1551A1F90249500A8D6FC /* CustomRadioButton.swift */,
 				A0DD8EA0218B3B54009D66C3 /* OTAViewController.swift */,
 				A06AB28021B52126001D343E /* AddressViewController.swift */,
+				2E07D88E2227EA7200A3FEBF /* AboutWebViewController.swift */,
 				A0259B6D219AA45400C0531E /* Items */,
 				89F4AA1021ADF7330049873E /* AddItemsViewController.swift */,
 				897C51C221B7E4FB00CD38B7 /* EnterKeyedInDetailsViewController.swift */,
+				A0044C982228F97D00329077 /* DeviceManagementViewController.swift */,
+				A0044C862228EDBC00329077 /* StoresConfiguration */,
 			);
 			path = CYBSMposKitDemo;
+			sourceTree = "<group>";
+		};
+		A0044C862228EDBC00329077 /* StoresConfiguration */ = {
+			isa = PBXGroup;
+			children = (
+				A0044C872228EDBC00329077 /* StoresConfiguration.json */,
+				A0044C882228EDBC00329077 /* CYBSDropDown */,
+			);
+			path = StoresConfiguration;
+			sourceTree = "<group>";
+		};
+		A0044C882228EDBC00329077 /* CYBSDropDown */ = {
+			isa = PBXGroup;
+			children = (
+				A0044C892228EDBC00329077 /* CYBSDropDownConstants.swift */,
+				A0044C8A2228EDBC00329077 /* CYBSDropDownCell.swift */,
+				A0044C8B2228EDBC00329077 /* CYBSDropDownUIView+Extension.swift */,
+				A0044C8C2228EDBC00329077 /* CYBSKeyboardListener.swift */,
+				A0044C8D2228EDBC00329077 /* CYBSDropDown+Appearance.swift */,
+				A0044C8E2228EDBC00329077 /* CYBSDropDown.swift */,
+				A0044C8F2228EDBC00329077 /* CYBSDropDownCell.xib */,
+			);
+			path = CYBSDropDown;
 			sourceTree = "<group>";
 		};
 		A0259B6D219AA45400C0531E /* Items */ = {
@@ -232,10 +286,22 @@
 			path = trade_gothic_lt_std;
 			sourceTree = "<group>";
 		};
+		A0743BFC224DE6DB000743B3 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				A0743BFD224DE6DB000743B3 /* SegmentCell.swift */,
+				A0743BFE224DE6DB000743B3 /* DetailCell.swift */,
+				A0743BFF224DE6DB000743B3 /* TextFieldCell.swift */,
+				A0743C01224DE6DB000743B3 /* SwitchCell.swift */,
+				A0743C07224DE751000743B3 /* Settings.storyboard */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		F890EB6D20DD964900EB04B9 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
-				F8B3156720FD64ED00509181 /* Settings.storyboard */,
+				A0743BFC224DE6DB000743B3 /* Views */,
 				F8A39B7D20D32778008E7E0E /* SettingsViewController.swift */,
 				987850471D10C6070048490A /* Settings.swift */,
 			);
@@ -312,8 +378,10 @@
 				A0259B8E219B2DC600C0531E /* TradeGothicLTStd.otf in Resources */,
 				4BC296701C5A814700CC7063 /* LaunchScreen.storyboard in Resources */,
 				A0259B8A219B2DC600C0531E /* TradeGothicLTStd-Extended.otf in Resources */,
+				A0044C972228EDBC00329077 /* CYBSDropDownCell.xib in Resources */,
 				A0259B84219B2DC600C0531E /* TradeGothicLTStd-BdCn20Obl.otf in Resources */,
 				4BC2966D1C5A814700CC7063 /* Assets.xcassets in Resources */,
+				A0743C08224DE751000743B3 /* Settings.storyboard in Resources */,
 				A0259B83219B2DC600C0531E /* TradeGothicLTStd-BdCn20.otf in Resources */,
 				A0259B81219B2DC600C0531E /* TradeGothicLTStd-Bd2.otf in Resources */,
 				A0259B8B219B2DC600C0531E /* TradeGothicLTStd-Light.otf in Resources */,
@@ -321,9 +389,9 @@
 				A0259B8D219B2DC600C0531E /* TradeGothicLTStd-Obl.otf in Resources */,
 				4BC2966B1C5A814700CC7063 /* Main.storyboard in Resources */,
 				A0259B85219B2DC600C0531E /* TradeGothicLTStd-Bold.otf in Resources */,
+				A0044C902228EDBC00329077 /* StoresConfiguration.json in Resources */,
 				A0259B86219B2DC600C0531E /* TradeGothicLTStd-BoldExt.otf in Resources */,
 				A0259B88219B2DC600C0531E /* TradeGothicLTStd-Cn18.otf in Resources */,
-				F8B3156820FD64EE00509181 /* Settings.storyboard in Resources */,
 				A0259B82219B2DC600C0531E /* TradeGothicLTStd-Bd2Obl.otf in Resources */,
 				A0259B87219B2DC600C0531E /* TradeGothicLTStd-BoldObl.otf in Resources */,
 				A0259B8C219B2DC600C0531E /* TradeGothicLTStd-LightObl.otf in Resources */,
@@ -340,23 +408,35 @@
 				988443AD1D4BB53D00EE332E /* TransactionDetailTableViewController.swift in Sources */,
 				98AE00831D4A6AC0007ACA49 /* HistoryTableViewCell.swift in Sources */,
 				4BC296681C5A814700CC7063 /* PlaceOrderViewController.swift in Sources */,
+				A0743C02224DE6DB000743B3 /* SegmentCell.swift in Sources */,
 				A0259B6F219AA58B00C0531E /* BaseCell.swift in Sources */,
 				9878504F1D10D8AE0048490A /* KeychainStore.m in Sources */,
 				46D1551B1F90249500A8D6FC /* CustomRadioButton.swift in Sources */,
 				A0DD8EA3218B3B6D009D66C3 /* TransactionSignatureCell.swift in Sources */,
 				4BC296661C5A814700CC7063 /* AppDelegate.swift in Sources */,
+				A0044C962228EDBC00329077 /* CYBSDropDown.swift in Sources */,
 				98812D851D5D63DF0061EF7C /* TransactionActionCell.swift in Sources */,
 				89F4AA1121ADF7330049873E /* AddItemsViewController.swift in Sources */,
 				897C51C321B7E4FB00CD38B7 /* EnterKeyedInDetailsViewController.swift in Sources */,
 				F8A39B7E20D32778008E7E0E /* SettingsViewController.swift in Sources */,
+				2E07D88F2227EA7200A3FEBF /* AboutWebViewController.swift in Sources */,
 				A0DD8EAC218B4A03009D66C3 /* OTAViewController.swift in Sources */,
+				A0044C922228EDBC00329077 /* CYBSDropDownCell.swift in Sources */,
 				985FA9221D2DB15A000CA276 /* HistoryTableViewController.swift in Sources */,
 				988443A11D4B2A9A00EE332E /* SearchTableViewController.swift in Sources */,
 				989BA9221D63BF4100DE2A0C /* PlaceOrderView.swift in Sources */,
+				A0743C03224DE6DB000743B3 /* DetailCell.swift in Sources */,
+				A0044C992228F97D00329077 /* DeviceManagementViewController.swift in Sources */,
+				A0743C04224DE6DB000743B3 /* TextFieldCell.swift in Sources */,
 				987850481D10C6070048490A /* Settings.swift in Sources */,
+				A0044C942228EDBC00329077 /* CYBSKeyboardListener.swift in Sources */,
 				98DC5C831D480591008C5334 /* Utils.swift in Sources */,
 				A06AB28121B52126001D343E /* AddressViewController.swift in Sources */,
+				A0044C932228EDBC00329077 /* CYBSDropDownUIView+Extension.swift in Sources */,
 				A0259B71219AA6E100C0531E /* ItemCell.swift in Sources */,
+				A0743C06224DE6DB000743B3 /* SwitchCell.swift in Sources */,
+				A0044C952228EDBC00329077 /* CYBSDropDown+Appearance.swift in Sources */,
+				A0044C912228EDBC00329077 /* CYBSDropDownConstants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,0 +1,74 @@
+//
+//  CYBSDropDownCell.swift
+//  CYBSMposKitDemo
+//
+//  Created by Rakesh Ramamurthy on 11/02/19.
+//  Copyright © 2018 CyberSource. All rights reserved.
+//
+
+import UIKit
+
+open class CYBSDropDownCell: UITableViewCell {
+		
+	//UI
+	@IBOutlet open weak var optionLabel: UILabel!
+	
+	var selectedBackgroundColor: UIColor?
+    var highlightTextColor: UIColor?
+    var normalTextColor: UIColor?
+
+}
+
+//MARK: - UI
+
+extension CYBSDropDownCell {
+	
+	override open func awakeFromNib() {
+		super.awakeFromNib()
+		
+		backgroundColor = .clear
+	}
+	
+	override open var isSelected: Bool {
+		willSet {
+			setSelected(newValue, animated: false)
+		}
+	}
+	
+	override open var isHighlighted: Bool {
+		willSet {
+			setSelected(newValue, animated: false)
+		}
+	}
+	
+	override open func setHighlighted(_ highlighted: Bool, animated: Bool) {
+		setSelected(highlighted, animated: animated)
+	}
+	
+	override open func setSelected(_ selected: Bool, animated: Bool) {
+		let executeSelection: () -> Void = { [weak self] in
+			guard let `self` = self else { return }
+
+			if let selectedBackgroundColor = self.selectedBackgroundColor {
+				if selected {
+					self.backgroundColor = selectedBackgroundColor
+                    self.optionLabel.textColor = self.highlightTextColor
+				} else {
+					self.backgroundColor = .clear
+                    self.optionLabel.textColor = self.normalTextColor
+				}
+			}
+		}
+		
+		if animated {
+			UIView.animate(withDuration: 0.3, animations: {
+				executeSelection()
+			})
+		} else {
+			executeSelection()
+		}
+
+		accessibilityTraits = selected ? UIAccessibilityTraitSelected : UIAccessibilityTraitNone
+	}
+	
+}

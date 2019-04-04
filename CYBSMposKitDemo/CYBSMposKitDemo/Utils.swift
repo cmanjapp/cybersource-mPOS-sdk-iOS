@@ -24,6 +24,10 @@ static let cache = NSCache<AnyObject, AnyObject>()
     completionHandler(.performDefaultHandling, URLCredential(trust: challenge.protectionSpace.serverTrust!))
   }
 
+    class func clearAccessToken() {
+        cache.removeAllObjects()
+    }
+    
   class func createAccessToken(_ completionHandler:@escaping (_ accessToken: String?, _ error: NSError?) -> Void) {
     let accessToken = Settings.sharedInstance.accessToken ?? ""
 

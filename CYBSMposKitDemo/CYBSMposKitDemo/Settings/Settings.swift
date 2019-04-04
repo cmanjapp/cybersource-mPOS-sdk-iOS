@@ -8,12 +8,15 @@
 
 import Foundation
 
+let DefaultSimpleOrderAPIVersion:String = "1.148"
+
 class Settings : NSObject, NSCoding {
     
     static let sharedInstance = Settings()
     static let environments = ["LIVE", "TEST"]
     static let defaultEnvironment = 1
     
+    var storeName: String?
     var merchantID: String?
     var deviceID: String?
     var clientID: String?
@@ -39,6 +42,9 @@ class Settings : NSObject, NSCoding {
     var merchantTransactionIdentifier: String?
     var showReceipt: Bool = true
     var partialAuthIndicator: Bool = false
+    var tipEnabled: Bool = false
+    var signatureEnabled: Bool = false
+    var taxEnabled: Bool = false
     var simpleOrderAPIVersion: String?
     var topImageURL: String?
     var backgroundColor: String?
@@ -60,9 +66,11 @@ class Settings : NSObject, NSCoding {
     var heavyFont: String?
     var blackFont: String?
     var currency: String? = "USD"
+    var taxRate: String? = "8.25"
 
     required convenience init(settings: Dictionary<String, String>) {
         self.init()
+        storeName = settings["storeID"]
         merchantID = settings["merchantID"]
         deviceID = settings["deviceID"]
         clientID = settings["clientID"]
@@ -79,6 +87,9 @@ class Settings : NSObject, NSCoding {
         serviceType = Int(settings["serviceType"] ?? "3") ?? 3
         commereceIndicator = Int(settings["commereceIndicator"] ?? "0") ?? 0
         partialAuthIndicator = NSString(string:settings["partialAuthIndicator"] ?? "false").boolValue
+        tipEnabled = NSString(string:settings["tipEnabled"] ?? "false").boolValue
+        signatureEnabled = NSString(string:settings["signatureEnabled"] ?? "false").boolValue
+        taxEnabled = NSString(string:settings["taxEnabled"] ?? "false").boolValue
         signatureMinAmount = Float(settings["signatureMinAmount"] ?? "1.00") ?? 1.00
         enableTokenization = NSString(string:settings["enableTokenization"] ?? "true").boolValue
         mddField1 = settings["mddField1"]
@@ -87,7 +98,7 @@ class Settings : NSObject, NSCoding {
         mddField4 = settings["mddField4"]
         mddField5 = settings["mddField5"]
         merchantTransactionIdentifier = settings["merchantTransactionIdentifier"]
-        simpleOrderAPIVersion = settings["simpleOrderAPIVersion"]
+        simpleOrderAPIVersion = settings["simpleOrderAPIVersion"] ?? DefaultSimpleOrderAPIVersion
         topImageURL = settings["topImageURL"]
         backgroundColor = settings["backgroundColor"]
         spinnerColor = settings["spinnerColor"]
@@ -108,10 +119,13 @@ class Settings : NSObject, NSCoding {
         heavyFont = settings["heavyFont"]
         blackFont = settings["blackFont"]
         currency = settings["currency"]
+        taxRate = settings["taxRate"] ?? "8.25"
+
     }
     
     required convenience init?(coder aDecoder: NSCoder) {
         self.init()
+        storeName = aDecoder.decodeObject(forKey: "storeID") as? String
         merchantID = aDecoder.decodeObject(forKey: "merchantID") as? String
         deviceID = aDecoder.decodeObject(forKey: "deviceID") as? String
         clientID = aDecoder.decodeObject(forKey: "clientID") as? String
@@ -128,6 +142,9 @@ class Settings : NSObject, NSCoding {
         serviceType = aDecoder.decodeInteger(forKey: "serviceType")
         commereceIndicator = aDecoder.decodeInteger(forKey: "commereceIndicator")
         partialAuthIndicator = aDecoder.decodeBool(forKey: "partialAuthIndicator")
+        tipEnabled = aDecoder.decodeBool(forKey: "tipEnabled")
+        signatureEnabled = aDecoder.decodeBool(forKey: "signatureEnabled")
+        taxEnabled = aDecoder.decodeBool(forKey: "taxEnabled")
         if let amtStr = aDecoder.decodeObject(forKey: "signatureMinAmount") as? String {
             signatureMinAmount = Float(amtStr)!
         } else {
@@ -162,9 +179,11 @@ class Settings : NSObject, NSCoding {
         heavyFont = aDecoder.decodeObject(forKey: "heavyFont") as? String
         blackFont = aDecoder.decodeObject(forKey: "blackFont") as? String
         currency = aDecoder.decodeObject(forKey: "currency") as? String
+        taxRate = aDecoder.decodeObject(forKey: "taxRate") as? String
     }
     
     func encode(with aCoder: NSCoder) {
+        aCoder.encode(storeName, forKey: "storeID")
         aCoder.encode(merchantID, forKey: "merchantID")
         aCoder.encode(deviceID, forKey: "deviceID")
         aCoder.encode(clientID, forKey: "clientID")
@@ -181,6 +200,9 @@ class Settings : NSObject, NSCoding {
         aCoder.encode(serviceType, forKey: "serviceType")
         aCoder.encode(commereceIndicator, forKey: "commereceIndicator")
         aCoder.encode(partialAuthIndicator, forKey: "partialAuthIndicator")
+        aCoder.encode(tipEnabled, forKey: "tipEnabled")
+        aCoder.encode(signatureEnabled, forKey: "signatureEnabled")
+        aCoder.encode(taxEnabled, forKey: "taxEnabled")
         let amt = String(format: "%.2f", signatureMinAmount)
         aCoder.encode(amt, forKey: "signatureMinAmount")
         aCoder.encode(enableTokenization, forKey: "enableTokenization")
@@ -211,6 +233,8 @@ class Settings : NSObject, NSCoding {
         aCoder.encode(heavyFont, forKey: "heavyFont")
         aCoder.encode(blackFont, forKey: "blackFont")
         aCoder.encode(currency, forKey: "currency")
+        aCoder.encode(taxRate, forKey: "taxRate")
+
     }
     
     func reload() {
@@ -219,6 +243,7 @@ class Settings : NSObject, NSCoding {
         let data = KeychainStore.getSecureData(forKey: key)
         if (data != nil) {
             if let settings = NSKeyedUnarchiver.unarchiveObject(with: data!) as? Settings {
+                storeName = settings.storeName
                 merchantID = settings.merchantID
                 deviceID = settings.deviceID
                 clientID = settings.clientID
@@ -235,6 +260,9 @@ class Settings : NSObject, NSCoding {
                 serviceType = settings.serviceType
                 commereceIndicator = settings.commereceIndicator
                 partialAuthIndicator = settings.partialAuthIndicator
+                tipEnabled = settings.tipEnabled
+                signatureEnabled = settings.signatureEnabled
+                taxEnabled = settings.taxEnabled
                 signatureMinAmount = settings.signatureMinAmount
                 enableTokenization = settings.enableTokenization
                 mddField1 = settings.mddField1
@@ -243,7 +271,10 @@ class Settings : NSObject, NSCoding {
                 mddField4 = settings.mddField4
                 mddField5 = settings.mddField5
                 merchantTransactionIdentifier = settings.merchantTransactionIdentifier
-                simpleOrderAPIVersion = settings.simpleOrderAPIVersion
+                simpleOrderAPIVersion = settings.simpleOrderAPIVersion ?? DefaultSimpleOrderAPIVersion
+                if (simpleOrderAPIVersion?.isEmpty)! {
+                    simpleOrderAPIVersion = DefaultSimpleOrderAPIVersion
+                }
                 topImageURL = settings.topImageURL
                 backgroundColor = settings.backgroundColor
                 spinnerColor = settings.spinnerColor
@@ -264,11 +295,13 @@ class Settings : NSObject, NSCoding {
                 heavyFont = settings.heavyFont
                 blackFont = settings.blackFont
                 currency = settings.currency
+                taxRate = settings.taxRate ?? "8.25"
             }
         }
     }
     
     func reset() {
+        storeName = nil
         merchantID = nil
         deviceID = nil
         clientID = nil
@@ -285,6 +318,9 @@ class Settings : NSObject, NSCoding {
         serviceType = 3
         commereceIndicator = 0
         partialAuthIndicator = false
+        tipEnabled = false
+        signatureEnabled = false
+        taxEnabled = false
         signatureMinAmount = 1.00
         enableTokenization = true
         mddField1 = nil
@@ -293,7 +329,7 @@ class Settings : NSObject, NSCoding {
         mddField4 = nil
         mddField5 = nil
         merchantTransactionIdentifier = nil
-        simpleOrderAPIVersion = nil
+        simpleOrderAPIVersion = DefaultSimpleOrderAPIVersion
         topImageURL = nil
         backgroundColor = nil
         spinnerColor = nil
@@ -314,6 +350,7 @@ class Settings : NSObject, NSCoding {
         heavyFont = nil
         blackFont = nil
         currency = "USD"
+        taxRate = "8.25"
     }
     
     func save() {

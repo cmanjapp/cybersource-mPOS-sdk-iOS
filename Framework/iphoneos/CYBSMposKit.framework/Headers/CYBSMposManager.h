@@ -121,6 +121,29 @@ typedef void (^OTAUpdateProgressBlock)(float iPercentage, CYBSMposOTAOperation i
 
 - (void)updateMerchantDescriptorSettings:(CYBSMerchantDescriptor *_Nonnull)merchantDescriptor;
 
+- (void)activateDeviceWithClientId:(nonnull NSString *)paramClientId
+                       withUserName:(nonnull NSString *)paramUserName
+                       withPassword:(nonnull NSString *)paramPassword
+                     withMerchantId:(nonnull NSString *)paramMerchantId
+                       withDeviceId:(nonnull NSString *)paramDeviceId
+                    withDescription:(nullable NSString *)paramDescription
+                 withDevicePlatform:(nullable NSString *)paramDevicePlatform
+                     withSDKVersion:(nullable NSString *)paramSDKVersion
+                     withAppVersion:(nullable NSString *)paramApplicationVersion
+                    withPhoneNumber:(nullable NSString *)paramPhoneNumber
+                       withDelegate:(nullable id<CYBSMposManagerDelegate>)paramDelegate;
+
+- (void)activateDeviceWithClientId:(nonnull NSString *)paramClientId
+                    withMerchantId:(nonnull NSString *)paramMerchantId
+                      withDeviceId:(nonnull NSString *)paramDeviceId
+                  withClientSecret:(nonnull NSString *)paramClientSecret
+                   withDescription:(nullable NSString *)paramDescription
+                withDevicePlatform:(nullable NSString *)paramDevicePlatform
+                    withSDKVersion:(nullable NSString *)paramSDKVersion
+                    withAppVersion:(nullable NSString *)paramApplicationVersion
+                   withPhoneNumber:(nullable NSString *)paramPhoneNumber
+                      withDelegate:(nullable id<CYBSMposManagerDelegate>)paramDelegate;
+
 /**
  @brief Performs payment capture
 
@@ -385,5 +408,7 @@ typedef void (^OTAUpdateProgressBlock)(float iPercentage, CYBSMposOTAOperation i
 - (void)onReceiptPrintDataEnd;
 
 - (void)onReceiptPrintDataCancelled;
+
+- (void)onDeviceRegister:(NSError *_Nonnull)responseData;
 
 @end

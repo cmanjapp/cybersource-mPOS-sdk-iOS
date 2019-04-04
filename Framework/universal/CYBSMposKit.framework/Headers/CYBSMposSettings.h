@@ -11,12 +11,14 @@ FOUNDATION_EXPORT NSString * __nonnull const CYBSMposSettingsLiveTransactionSear
 FOUNDATION_EXPORT NSString * __nonnull const CYBSMposSettingsLiveTransactionDetailAPIURL;
 FOUNDATION_EXPORT NSString * __nonnull const CYBSMposSettingsLiveReceiptAPIURL;
 FOUNDATION_EXPORT NSString * __nonnull const CYBSMposSettingsLiveSubstituteReceiptAPIURL;
+FOUNDATION_EXPORT NSString * __nonnull const CYBSMposSettingsLiveDeviceRegistrationAPIURL;
 
 FOUNDATION_EXPORT NSString * __nonnull const CYBSMposSettingsTestSimpleOrderAPIURL;
 FOUNDATION_EXPORT NSString * __nonnull const CYBSMposSettingsTestTransactionSearchAPIURL;
 FOUNDATION_EXPORT NSString * __nonnull const CYBSMposSettingsTestTransactionDetailAPIURL;
 FOUNDATION_EXPORT NSString * __nonnull const CYBSMposSettingsTestReceiptAPIURL;
 FOUNDATION_EXPORT NSString * __nonnull const CYBSMposSettingsTestSubstituteReceiptAPIURL;
+FOUNDATION_EXPORT NSString * __nonnull const CYBSMposSettingsTestDeviceRegistrationAPIURL;
 
 FOUNDATION_EXPORT NSString * __nonnull const CYBSMposSettingsDefaultSimpleOrderAPIVersion;
 

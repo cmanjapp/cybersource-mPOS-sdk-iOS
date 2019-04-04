@@ -54,12 +54,12 @@ class SearchTableViewController: UITableViewController {
   // MARK: - IBAction
 
   @IBAction func fromDatePickerValueChanged(_ fromDatePicker: UIDatePicker) {
-    setDetailTextLabelText(fromDateCellIndexPath, text: timeFormatter.string(from: fromDatePicker.date))
+    setDetailTextLabelText(fromDateCellIndexPath, text: dateFormatter.string(from: fromDatePicker.date))
     query.dateFrom = fromDatePicker.date.timeIntervalSince1970
   }
 
   @IBAction func toDatePickerValueChanged(_ toDatePicker: UIDatePicker) {
-    setDetailTextLabelText(toDateCellIndexPath, text: timeFormatter.string(from: toDatePicker.date))
+    setDetailTextLabelText(toDateCellIndexPath, text: dateFormatter.string(from: toDatePicker.date))
     query.dateTo = toDatePicker.date.timeIntervalSince1970
   }
 
@@ -129,7 +129,7 @@ class SearchTableViewController: UITableViewController {
       if getDetailTextLabelText(fromDateCellIndexPath).isEmpty {
         fromDatePicker.date = Date()
       }
-      setDetailTextLabelText(fromDateCellIndexPath, text: timeFormatter.string(from: fromDatePicker.date))
+      setDetailTextLabelText(fromDateCellIndexPath, text: dateFormatter.string(from: fromDatePicker.date))
       query.dateFrom = fromDatePicker.date.timeIntervalSince1970
     }
     tableView.endUpdates()
@@ -150,7 +150,7 @@ class SearchTableViewController: UITableViewController {
       if getDetailTextLabelText(toDateCellIndexPath).isEmpty {
         toDatePicker.date = Date()
       }
-      setDetailTextLabelText(toDateCellIndexPath, text: timeFormatter.string(from: toDatePicker.date))
+      setDetailTextLabelText(toDateCellIndexPath, text: dateFormatter.string(from: toDatePicker.date))
       query.dateTo = toDatePicker.date.timeIntervalSince1970
     }
     tableView.endUpdates()
@@ -167,9 +167,13 @@ class SearchTableViewController: UITableViewController {
     tableView.endUpdates()
     tableView.cellForRow(at: todayDateCellIndexPath)!.accessoryType = .checkmark
     query.dateFrom = dateFormatter.date(from: dateFormatter.string(from: Date()))!.timeIntervalSince1970
-    query.dateTo = query.dateFrom + 86400
-    setDetailTextLabelText(fromDateCellIndexPath, text: "")
-    setDetailTextLabelText(toDateCellIndexPath, text: "")
+    query.dateTo = query.dateFrom + 86399
+
+    let dateFrom = Date(timeIntervalSince1970: query.dateFrom)
+    let dateTo = Date(timeIntervalSince1970: query.dateTo)
+
+    setDetailTextLabelText(fromDateCellIndexPath, text: dateFormatter.string(from: dateFrom))
+    setDetailTextLabelText(toDateCellIndexPath, text: dateFormatter.string(from: dateTo))
   }
 
   func yesterdayDateCellSelected() {
@@ -184,8 +188,12 @@ class SearchTableViewController: UITableViewController {
     tableView.cellForRow(at: yesterdayDateCellIndexPath)!.accessoryType = .checkmark
     query.dateTo = dateFormatter.date(from: dateFormatter.string(from: Date()))!.timeIntervalSince1970
     query.dateFrom = query.dateTo - 86400
-    setDetailTextLabelText(fromDateCellIndexPath, text: "")
-    setDetailTextLabelText(toDateCellIndexPath, text: "")
+    
+    let dateFrom = Date(timeIntervalSince1970: query.dateFrom)
+    let dateTo = Date(timeIntervalSince1970: query.dateTo)
+    setDetailTextLabelText(fromDateCellIndexPath, text: dateFormatter.string(from: dateFrom))
+    setDetailTextLabelText(toDateCellIndexPath, text: dateFormatter.string(from: dateTo))
+
   }
 
   func last60DaysDateCellSelected() {
@@ -198,10 +206,13 @@ class SearchTableViewController: UITableViewController {
     tableView.reloadRows(at: [last60DaysDateCellIndexPath], with: .none)
     tableView.endUpdates()
     tableView.cellForRow(at: last60DaysDateCellIndexPath)!.accessoryType = .checkmark
-    query.dateTo = 0
-    query.dateFrom = 0
-    setDetailTextLabelText(fromDateCellIndexPath, text: "")
-    setDetailTextLabelText(toDateCellIndexPath, text: "")
+    query.dateTo = dateFormatter.date(from: dateFormatter.string(from: Date()))!.timeIntervalSince1970 + 86399
+    query.dateFrom = query.dateTo - (86400 * 60)
+    let dateFrom = Date(timeIntervalSince1970: query.dateFrom)
+    let dateTo = Date(timeIntervalSince1970: query.dateTo)
+    
+    setDetailTextLabelText(fromDateCellIndexPath, text: dateFormatter.string(from: dateFrom))
+    setDetailTextLabelText(toDateCellIndexPath, text: dateFormatter.string(from: dateTo))
   }
 
   func filterByAccountSuffixCellSelected() {

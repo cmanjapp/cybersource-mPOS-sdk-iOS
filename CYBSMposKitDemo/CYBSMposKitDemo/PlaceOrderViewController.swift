@@ -134,14 +134,24 @@ class PlaceOrderViewController: UIViewController, UITextFieldDelegate, UITableVi
                     currency = "USD"
                 }
                 var amount:NSDecimalNumber = 0.0
+                var subtotalAmount:NSDecimalNumber = 0.0
+                
                 if self.subTotalLabel.text != "" {
+                    let subTotal:Float = Float(self.subTotalLabel.text!) ?? 0.0
+                    subtotalAmount = NSDecimalNumber(value: subTotal)
                     amount = NSDecimalNumber(string: self.subTotalLabel.text!)
                 }
-                let minAmountForSignature = Settings.sharedInstance.signatureMinAmount
                 var skipSignatureView = false
-                if(amount.compare(NSDecimalNumber(value: minAmountForSignature)) == .orderedAscending){
+                let minAmountForSignature = Settings.sharedInstance.signatureMinAmount
+                if (Settings.sharedInstance.signatureEnabled == true) {
+                    if(subtotalAmount.compare(NSDecimalNumber(value: minAmountForSignature)) == .orderedAscending ){
+                        skipSignatureView = true
+                    }
+                }
+                else {
                     skipSignatureView = true
                 }
+                
                 let commInd = CYBSMposPaymentRequestCommerceIndicator(rawValue: UInt(Settings.sharedInstance.commereceIndicator))
                 let paymentRequest = CYBSMposPaymentRequest(merchantID: merchantID, accessToken: accessToken, amount: amount, entryMode: .swipeOrInsertOrTap)
                 if (Settings.sharedInstance.merchantTransactionIdentifier?.count != 0) {
@@ -153,12 +163,21 @@ class PlaceOrderViewController: UIViewController, UITextFieldDelegate, UITableVi
                 paymentRequest.skipSignature = skipSignatureView
                 paymentRequest.merchantDefinedDataArray = self.getMDDFields()
                 paymentRequest.merchantReferenceCode = merchantRefCode
-                paymentRequest.purchaseTotal.currency = currency!
+                paymentRequest.purchaseDetails?.currency = currency!
                 paymentRequest.commerceIndicator = commInd!
                 paymentRequest.items = self.getItemsList()
                 paymentRequest.shippingAddress = AddressData.sharedInstance.getShippingAddress()
                 paymentRequest.billingAddress = AddressData.sharedInstance.getBillingAddress()
                 paymentRequest.partialIndicator = Settings.sharedInstance.partialAuthIndicator
+                
+                if (Settings.sharedInstance.taxEnabled) {
+                    let taxDouble = Double(Settings.sharedInstance.taxRate ?? "8.25")
+                    let taxRate = Decimal((taxDouble ?? 8.25 )/100)
+                    paymentRequest.purchaseDetails?.tax = NSDecimalNumber(decimal: taxRate)
+                }
+                if (Settings.sharedInstance.tipEnabled) {
+                    paymentRequest.purchaseDetails?.tip = NSDecimalNumber(value:CartData.sharedInstance.tipAmount)
+                }
                 self.transactionRequest = paymentRequest
 
                 self.manager.performPayment(paymentRequest, parentViewController: self, delegate: self)
@@ -186,12 +205,21 @@ class PlaceOrderViewController: UIViewController, UITextFieldDelegate, UITableVi
                     currency = "USD"
                 }
                 var amount:NSDecimalNumber = 0.0
+                var subtotalAmount:NSDecimalNumber = 0.0
+                
                 if self.subTotalLabel.text != "" {
+                    let subTotal:Float = Float(self.subTotalLabel.text!) ?? 0.0
+                    subtotalAmount = NSDecimalNumber(value: subTotal)
                     amount = NSDecimalNumber(string: self.subTotalLabel.text!)
                 }
-                let minAmountForSignature = Settings.sharedInstance.signatureMinAmount
                 var skipSignatureView = false
-                if(amount.compare(NSDecimalNumber(value: minAmountForSignature)) == .orderedAscending){
+                let minAmountForSignature = Settings.sharedInstance.signatureMinAmount
+                if (Settings.sharedInstance.signatureEnabled == true) {
+                    if(subtotalAmount.compare(NSDecimalNumber(value: minAmountForSignature)) == .orderedAscending ){
+                        skipSignatureView = true
+                    }
+                }
+                else {
                     skipSignatureView = true
                 }
                 let commInd = CYBSMposPaymentRequestCommerceIndicator(rawValue: UInt(Settings.sharedInstance.commereceIndicator))
@@ -205,13 +233,20 @@ class PlaceOrderViewController: UIViewController, UITextFieldDelegate, UITableVi
                 paymentRequest.skipSignature = skipSignatureView
                 paymentRequest.merchantDefinedDataArray = self.getMDDFields()
                 paymentRequest.merchantReferenceCode = merchantRefCode
-                paymentRequest.purchaseTotal.currency = currency!
+                paymentRequest.purchaseDetails?.currency = currency!
                 paymentRequest.commerceIndicator = commInd!
                 paymentRequest.items = self.getItemsList()
                 paymentRequest.shippingAddress = AddressData.sharedInstance.getShippingAddress()
                 paymentRequest.billingAddress = AddressData.sharedInstance.getBillingAddress()
                 paymentRequest.partialIndicator = Settings.sharedInstance.partialAuthIndicator
-
+                if (Settings.sharedInstance.taxEnabled) {
+                    let taxDouble = Double(Settings.sharedInstance.taxRate ?? "8.25")
+                    let taxRate = Decimal((taxDouble ?? 8.25 )/100)
+                    paymentRequest.purchaseDetails?.tax = NSDecimalNumber(decimal: taxRate)
+                }
+                if (Settings.sharedInstance.tipEnabled) {
+                    paymentRequest.purchaseDetails?.tip = NSDecimalNumber(value:CartData.sharedInstance.tipAmount)
+                }
                 self.transactionRequest = paymentRequest
 
                 self.manager.performPayment(paymentRequest, parentViewController: self, delegate: self)
@@ -241,14 +276,24 @@ class PlaceOrderViewController: UIViewController, UITextFieldDelegate, UITableVi
                     currency = "USD"
                 }
                 var amount:NSDecimalNumber = 0.0
+                var subtotalAmount:NSDecimalNumber = 0.0
+                
                 if self.subTotalLabel.text != "" {
+                    let subTotal:Float = Float(self.subTotalLabel.text!) ?? 0.0
+                    subtotalAmount = NSDecimalNumber(value: subTotal)
                     amount = NSDecimalNumber(string: self.subTotalLabel.text!)
                 }
-                let minAmountForSignature = Settings.sharedInstance.signatureMinAmount
                 var skipSignatureView = false
-                if(amount.compare(NSDecimalNumber(value: minAmountForSignature)) == .orderedAscending){
+                let minAmountForSignature = Settings.sharedInstance.signatureMinAmount
+                if (Settings.sharedInstance.signatureEnabled == true) {
+                    if(subtotalAmount.compare(NSDecimalNumber(value: minAmountForSignature)) == .orderedAscending ){
+                        skipSignatureView = true
+                    }
+                }
+                else {
                     skipSignatureView = true
                 }
+                
                 let commInd = CYBSMposPaymentRequestCommerceIndicator(rawValue: UInt(Settings.sharedInstance.commereceIndicator))
                 let paymentRequest = CYBSMposPaymentRequest(merchantID: merchantID, accessToken: accessToken, amount: amount, entryMode: .readerKeyEntry)
                 if (Settings.sharedInstance.merchantTransactionIdentifier?.count != 0) {
@@ -260,13 +305,20 @@ class PlaceOrderViewController: UIViewController, UITextFieldDelegate, UITableVi
                 paymentRequest.skipSignature = skipSignatureView
                 paymentRequest.merchantDefinedDataArray = self.getMDDFields()
                 paymentRequest.merchantReferenceCode = merchantRefCode
-                paymentRequest.purchaseTotal.currency = currency!
+                paymentRequest.purchaseDetails?.currency = currency!
                 paymentRequest.commerceIndicator = commInd!
                 paymentRequest.items = self.getItemsList()
                 paymentRequest.shippingAddress = AddressData.sharedInstance.getShippingAddress()
                 paymentRequest.billingAddress = AddressData.sharedInstance.getBillingAddress()
                 paymentRequest.partialIndicator = Settings.sharedInstance.partialAuthIndicator
-
+                if (Settings.sharedInstance.taxEnabled) {
+                    let taxDouble = Double(Settings.sharedInstance.taxRate ?? "8.25")
+                    let taxRate = Decimal((taxDouble ?? 8.25 )/100)
+                    paymentRequest.purchaseDetails?.tax = NSDecimalNumber(decimal: taxRate)
+                }
+                if (Settings.sharedInstance.tipEnabled) {
+                    paymentRequest.purchaseDetails?.tip = NSDecimalNumber(value:CartData.sharedInstance.tipAmount)
+                }
                 self.transactionRequest = paymentRequest
 
                 self.manager.performPayment(paymentRequest, parentViewController: self, delegate: self)
@@ -447,30 +499,27 @@ class PlaceOrderViewController: UIViewController, UITextFieldDelegate, UITableVi
     
     func getItemsList() -> Array<CYBSMposItem> {
         var itemsList = Array<CYBSMposItem>()
-        
         for item in CartData.sharedInstance.items {
             let lineItem = CYBSMposItem()
             lineItem.name = item.itemName
             lineItem.quantity = item.itemQuantity!
             lineItem.price = item.itemizedAmount
-            
+            if (Settings.sharedInstance.taxEnabled == true) {
+                if let tax = Settings.sharedInstance.taxRate {
+                    let taxDouble = Double(tax)
+                    let taxRate = Decimal((taxDouble ?? 8.25 )/100)
+                    lineItem.itemTaxAmount = NSDecimalNumber(decimal: taxRate)
+                }
+            }
             itemsList.append(lineItem)
         }
-        
         return itemsList
     }
     
+    
     func calculateSubtotalAndItemCount() {
         let cart = CartData.sharedInstance
-        var finalTotal:Float = 0.0
-        for item in cart.items {
-            var subTotal:Float = 0.0
-            subTotal = subTotal.adding(Float(item.itemizedAmount))
-            subTotal = subTotal.multiplied(by: Float(item.itemQuantity!))
-            
-            finalTotal = finalTotal + subTotal
-        }
-        self.subTotalLabel.text = String(format: "%.2f", finalTotal)
+        self.subTotalLabel.text = String(format: "%.2f", cart.grandTotalAmount)
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
@@ -539,15 +588,23 @@ class PlaceOrderViewController: UIViewController, UITextFieldDelegate, UITableVi
                     }
                     let currency = Settings.sharedInstance.currency ?? "USD"
                     var amount:NSDecimalNumber = 0.0
+                    var subtotalAmount:NSDecimalNumber = 0.0
+
                     if self.subTotalLabel.text != "" {
+                        let subTotal:Float = Float(self.subTotalLabel.text!) ?? 0.0
+                        subtotalAmount = NSDecimalNumber(value: subTotal)
                         amount = NSDecimalNumber(string: self.subTotalLabel.text!)
                     }
-                    let minAmountForSignature = Settings.sharedInstance.signatureMinAmount
                     var skipSignatureView = false
-                    if(amount.compare(NSDecimalNumber(value: minAmountForSignature)) == .orderedAscending || amount.compare(NSDecimalNumber(value: minAmountForSignature)) == .orderedSame){
+                    let minAmountForSignature = Settings.sharedInstance.signatureMinAmount
+                    if (Settings.sharedInstance.signatureEnabled == true) {
+                        if(subtotalAmount.compare(NSDecimalNumber(value: minAmountForSignature)) == .orderedAscending ){
+                            skipSignatureView = true
+                        }
+                    }
+                    else {
                         skipSignatureView = true
                     }
-
                     let commInd = CYBSMposPaymentRequestCommerceIndicator(rawValue: UInt(Settings.sharedInstance.commereceIndicator))
                     let paymentRequest = CYBSMposPaymentRequest(merchantID: merchantID, accessToken: accessToken, amount: amount, entryMode: .appKeyEntry)
                     if (Settings.sharedInstance.merchantTransactionIdentifier?.count != 0) {
@@ -559,7 +616,7 @@ class PlaceOrderViewController: UIViewController, UITextFieldDelegate, UITableVi
                     paymentRequest.skipSignature = skipSignatureView
                     paymentRequest.merchantDefinedDataArray = self.getMDDFields()
                     paymentRequest.merchantReferenceCode = merchantRefCode
-                    paymentRequest.purchaseTotal.currency = currency
+                    paymentRequest.purchaseDetails?.currency = currency
                     paymentRequest.commerceIndicator = commInd!
                     paymentRequest.items = self.getItemsList()
                     paymentRequest.shippingAddress = AddressData.sharedInstance.getShippingAddress()
@@ -685,6 +742,18 @@ extension PlaceOrderViewController : CYBSMposManagerDelegate {
         return paths[0]
     }
     
+    func getTotalAmountFromResponse(response: CYBSMposPaymentResponse) -> Float {
+        var totalAmt:Float = 0.0
+        let numberFormatter = NumberFormatter()
+        if let authReply = response.authReply {
+            totalAmt = numberFormatter.number(from: authReply.amount!)!.floatValue
+        } else if let captureReply = response.captureReply {
+            totalAmt = numberFormatter.number(from: captureReply.amount!)!.floatValue
+        }
+        
+        return totalAmt
+    }
+    
     func emailReceiptWith(_ result: CYBSMposPaymentResponse?, error: Error?) {
         guard result != nil else {
             return
@@ -719,12 +788,11 @@ extension PlaceOrderViewController : CYBSMposManagerDelegate {
                     merchantReferenceCode: result.merchantReferenceCode ?? "",
                     authCode: result.authorizationCode ?? "",
                     shippingAmount: "USD $0.00",
-                    taxAmount: "USD $0.00",
-                    totalPurchaseAmount: "\(self.subTotalLabel.text!)",
+                    taxAmount: String(format: "%.2f", CartData.sharedInstance.taxTotalAmount),
+                    totalPurchaseAmount: self.subTotalLabel.text ?? "0.00",
                     subscriptionID: result.subscriptionID ?? "",
                     accessToken: self.accessToken ?? ""
                 )
-                
                 receiptRequest.items = self.getItemsList()
                 receiptRequest.emvTags = self.transactionResponse?.emvReply?.emvTags as? [Any]
                 receiptRequest.suffix = self.transactionResponse?.card?.suffix

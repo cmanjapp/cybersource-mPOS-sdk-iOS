@@ -8,6 +8,13 @@
 
 import UIKit
 
+extension Double {
+    func roundTo(places:Int) -> Double {
+        let divisor = pow(10.0, Double(places))
+        return (self * divisor).rounded() / divisor
+    }
+}
+
 class cartItem: NSObject {
     var itemName:String?
     var itemQuantity:NSInteger?
@@ -23,8 +30,13 @@ class cartItem: NSObject {
 
 class CartData: NSObject {
     var items = Array<cartItem>()
-    static var sharedInstance = CartData()
     
+    var grandTotalAmount:Double = 0.0
+    var subTotalAmount:Double = 0.0
+    var taxTotalAmount:Double = 0.0
+    var tipAmount:Double = 0.0
+
+    static var sharedInstance = CartData()
     private override init() {
     }
     
@@ -40,6 +52,20 @@ class AddItemsViewController: UIViewController, UITextFieldDelegate, UITableView
     var delegate:AddItemsViewControllerDelegate?
     @IBOutlet weak var itemsTableView: UITableView!
     @IBOutlet weak var subTotalLabel: UILabel!
+    @IBOutlet weak var grandTotalLabel: UILabel!
+    @IBOutlet weak var taxAmountLabel: UILabel!
+    @IBOutlet weak var tipAmountTextField: UITextField!
+    @IBOutlet weak var tipAmountLabel: UILabel!
+
+    @IBAction func continueBtnAction(_ sender: Any) {
+        if Settings.sharedInstance.tipEnabled == true {
+            self.showTipAlert()
+        }
+        else {
+            self.navigationController?.popToRootViewController(animated: true)
+            self.delegate?.addItemsDidFinish(addItemsViewController: self)
+        }
+    }
     
     func backToInitial(sender: AnyObject) {
         self.navigationController?.popToRootViewController(animated: true)
@@ -48,8 +74,10 @@ class AddItemsViewController: UIViewController, UITextFieldDelegate, UITableView
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "< Back", style: .plain, target: self, action: #selector(self.backToInitial(sender:)))
+        //self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "< Back", style: .plain, target: self, action: #selector(self.backToInitial(sender:)))
         // Do any additional setup after loading the view.
+        
+        self.navigationItem.hidesBackButton = true
     }
     
     
@@ -66,24 +94,108 @@ class AddItemsViewController: UIViewController, UITextFieldDelegate, UITableView
         // Dispose of any resources that can be recreated.
     }
     
+    func showTipAlert(){
+        let alertController = UIAlertController(title: "Tip",
+                                                message: "Please enter the tip amount.",
+                                                preferredStyle: .alert)
+        alertController.addTextField(configurationHandler: { (textField) in
+            textField.placeholder = "Tip Amount"
+            textField.keyboardType = .decimalPad
+        })
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (action) in
+            self.backToInitial(sender: alertController)
+        }
+        alertController.addAction(cancelAction)
+        let doneAction = UIAlertAction(title: "Done", style: .default) { (action) in
+            
+            if let tip =  alertController.textFields![0].text {
+                let tipAmount: Double  = Double(tip) ?? 0.0
+                self.tipAmountTextField.text = String(format: "%.2f", tipAmount)
+                CartData.sharedInstance.tipAmount = tipAmount
+                self.calculateSubtotalAndItemCount()
+            }
+            self.backToInitial(sender: alertController)
+        }
+        alertController.addAction(doneAction)
+        self.present(alertController, animated: true) {
+        }
+    }
+    
     func populateTable() {
         self.itemsTableView.delegate = self
         self.itemsTableView.dataSource = self
         self.itemsTableView.setEditing(true, animated: false)
+        if Settings.sharedInstance.tipEnabled == false {
+            CartData.sharedInstance.tipAmount = 0.0
+            self.tipAmountLabel.isHidden = true
+            self.tipAmountTextField.isHidden = true
+        }
+        else {
+            self.tipAmountLabel.isHidden = false
+            self.tipAmountTextField.isHidden = false
+        }
         self.calculateSubtotalAndItemCount()
+        self.tipAmountTextField.text = String(format: "%.2f", CartData.sharedInstance.tipAmount)
+
+    }
+    
+//    func roundDecimal(number:NSDecimalNumber) -> NSDecimalNumber {
+//        
+//        let roundedValue = number.rounding(accordingToBehavior: behavior)
+//        return roundedValue
+//    }
+    
+    
+    public func calcCost() -> (subTotal: Double, tax: Double, grandTotal: Double) {
+        var subTotal: NSDecimalNumber = NSDecimalNumber.zero
+        var taxAmount: NSDecimalNumber = NSDecimalNumber.zero
+        var grandTotal: NSDecimalNumber = NSDecimalNumber.zero
+        let scale: Int16 = 2
+        
+        let behavior = NSDecimalNumberHandler(roundingMode: .plain, scale: scale, raiseOnExactness: false, raiseOnOverflow: false, raiseOnUnderflow: false, raiseOnDivideByZero: true)
+
+        
+        let cart = CartData.sharedInstance
+        for item in cart.items {
+            var itemTotal:NSDecimalNumber = NSDecimalNumber.zero
+            var itemTax:NSDecimalNumber = NSDecimalNumber.zero
+
+            itemTotal = itemTotal.adding(item.itemizedAmount)
+            itemTotal = itemTotal.multiplying(by: NSDecimalNumber(value: item.itemQuantity!), withBehavior: behavior)
+            if (Settings.sharedInstance.taxEnabled == true) {
+                if let tax = Settings.sharedInstance.taxRate {
+                    let taxDouble = Double(tax)
+                    let taxRate = (taxDouble ?? 8.25 )/100.00
+                    //taxAmount =  subTotal * taxRate
+                    itemTax = itemTotal.multiplying(by: NSDecimalNumber(value: taxRate), withBehavior: behavior)
+                    taxAmount = taxAmount.adding(itemTax)
+                }
+            }
+            subTotal = subTotal.adding(itemTotal)
+        }
+        
+        grandTotal = subTotal.adding(taxAmount)
+        // Done if no product selection
+        
+        return (subTotal.doubleValue, taxAmount.doubleValue, grandTotal.doubleValue)
     }
     
     func calculateSubtotalAndItemCount() {
-        var finalTotal:Float = 0.0
-        let cart = CartData.sharedInstance
-        for item in cart.items {
-            var subTotal:Float = 0.0
-            subTotal = subTotal.adding(Float(item.itemizedAmount))
-            subTotal = subTotal.multiplied(by: Float(item.itemQuantity!))
-            
-            finalTotal = finalTotal + subTotal
+        let cost = self.calcCost()
+        var grandTotal =  cost.grandTotal
+        if Settings.sharedInstance.tipEnabled == true {
+            grandTotal = cost.grandTotal + CartData.sharedInstance.tipAmount
         }
-        self.subTotalLabel.text = String(format: "%.2f", finalTotal)
+        self.subTotalLabel.text = String(format: "%.2f", cost.subTotal)
+        self.grandTotalLabel.text = String(format: "%.2f", grandTotal)
+        self.taxAmountLabel.text = String(format: "%.2f", cost.tax)
+        
+        
+        CartData.sharedInstance.grandTotalAmount = grandTotal
+        CartData.sharedInstance.subTotalAmount = cost.subTotal
+        CartData.sharedInstance.taxTotalAmount = cost.tax
+
+        
     }
 
     
@@ -101,6 +213,7 @@ class AddItemsViewController: UIViewController, UITextFieldDelegate, UITableView
     
     @IBAction func clearAll(_ sender: Any) {
         CartData.sharedInstance.items.removeAll()
+        CartData.sharedInstance.tipAmount = 0.0
         self.itemsTableView.reloadData()
         self.calculateSubtotalAndItemCount()
     }

@@ -54,7 +54,6 @@ typedef NS_ENUM(NSUInteger, CYBSMposPaymentRequestDecryptionServices) {
 @property (nonatomic, strong, nonnull) NSString *merchantID;
 @property (nonatomic, strong, nonnull) NSString *accessToken;
 @property (nonatomic, strong, nonnull) NSString *merchantReferenceCode;
-@property (nonatomic, strong, nonnull) CYBSMposPaymentRequestPurchaseTotal *purchaseTotal;
 @property (nonatomic, assign) CYBSMposPaymentRequestEntryMode entryMode;
 @property (nonatomic, assign) CYBSMposPaymentRequestCommerceIndicator commerceIndicator;
 @property (nonatomic, assign) CYBSMposPaymentRequestSupportedServices paymentService;

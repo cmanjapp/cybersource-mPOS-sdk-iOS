@@ -33,6 +33,12 @@
 //! The shipping cost
 @property (nonatomic, strong) NSDecimalNumber *shippingAmount;
 
+//! Total amount
+@property (nonatomic, strong) NSDecimalNumber *totalAmount;
+
+
+- (nonnull instancetype)initWithCurrency:(nonnull NSString *)currency amount:(nonnull NSDecimalNumber *)amount;
+
 //! Total Tax amount
 -(NSDecimalNumber *) getTotalTaxAmount:(NSDecimalNumber *)totalAmount;
 

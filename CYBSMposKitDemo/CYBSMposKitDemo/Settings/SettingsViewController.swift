@@ -8,6 +8,14 @@
 
 import UIKit
 
+public struct StoreAttribute {
+    var storeName: String
+    var merchantId: String
+    var deviceId: String
+    var clientId: String
+    var terminalId: String
+}
+
 class SettingsViewController: UITableViewController {
     enum Section : Int {
         case Environment = 0
@@ -19,14 +27,21 @@ class SettingsViewController: UITableViewController {
         case PartialAuthIndicator
         case commerceIndicator
         case signature
+        case Taxes
+        case Tips
         case merchantDefinedData
         case uISettings
         case Endpoints
-        case about
         case Currency
         case OTA
         case Address
         case resetAllSettings
+        case about
+    }
+    
+    enum AboutSection : Int {
+        case PrivacyPolicy = 0
+        case HelpFeedback
     }
     
     @IBOutlet weak var environmentSegment: UISegmentedControl!
@@ -40,6 +55,9 @@ class SettingsViewController: UITableViewController {
     @IBOutlet weak var passwordField: UITextField!
     @IBOutlet weak var accessTokenField: UITextField!
     
+    @IBOutlet weak var storeNameField: UITextField!
+    @IBOutlet weak var storeIdChooseBtn: UIButton!
+
     // Endpoints Section
     @IBOutlet weak var simpleOrderField: UITextField!
     @IBOutlet weak var transactionSearchField: UITextField!
@@ -47,15 +65,19 @@ class SettingsViewController: UITableViewController {
     @IBOutlet weak var receiptField: UITextField!
     @IBOutlet weak var substituteReceiptField: UITextField!
     @IBOutlet weak var oAuthTokenField: UITextField!
+    @IBOutlet weak var deviceRegistrationField: UITextField!
     @IBOutlet weak var simpleOrderVerField: UITextField!
     @IBOutlet weak var trustServerCertSwitch: UISwitch!
     @IBOutlet weak var maskSwitch: UISwitch!
+    @IBOutlet weak var taxField: UITextField!
+
     
     var simpleOrderFieldValue:String?
     var transactionSearchFieldValue:String?
     var transactionDetailFieldValue:String?
     var receiptFieldValue:String?
     var substituteReceiptFieldValue:String?
+    var deviceRegistrationFieldValue:String?
     var oAuthTokenFieldValue:String?
     var simpleOrderVerFieldValue:String?
 
@@ -98,26 +120,39 @@ class SettingsViewController: UITableViewController {
     @IBOutlet weak var showReceiptSwitch: UISwitch!
     @IBOutlet weak var currencyField: UITextField!
     @IBOutlet weak var partialAuthSwitch: UISwitch!
-    
+    @IBOutlet weak var tipsSwitch: UISwitch!
+    @IBOutlet weak var signatureSwitch: UISwitch!
+    @IBOutlet weak var taxSwitch: UISwitch!
+
     // UI components -> UISettings mapping
     fileprivate var mapping = [Int : String]()
+    
+    let chooseStoreDropDown = CYBSDropDown()
+    var storesDataLIVE = Array<StoreAttribute> ()
+    var storesDataCAS = Array<StoreAttribute> ()
+    var storesDataCUSTOM = Array<StoreAttribute> ()
     
     // MARK: - Settings view lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        readStoreInfo()
+
         setLogoForTitle()
         setVersions()
         setKeyboardTapDismiss()
         setEnvironmentSegment()
-        updateAllSettings()
         self.maskSwitch.setOn(false, animated: true)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        readStoreInfo()
+        updateAllSettings()
+
         //this is required to show updated merchantTransactionIdentifier value after transaction
         updateMerchantDefinedData()
+        setupStoresDropDown()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -129,6 +164,7 @@ class SettingsViewController: UITableViewController {
     
     private func setEnvironmentSegment() {
         environmentSegment.removeSegment(at: 2, animated: false)
+        environmentSegment.selectedSegmentIndex = Settings.getEnvironment()
     }
     
     private func setLogoForTitle() {
@@ -154,10 +190,14 @@ class SettingsViewController: UITableViewController {
         Settings.setEnvironment(sender.selectedSegmentIndex)
         Settings.sharedInstance.reload()
         updateAllSettings()
+        setupStoresDropDown()
         self.maskSwitch.setOn(false, animated: true)
     }
     
     func getMaskedURL ( urlToMask:String ) -> String {
+        if (urlToMask.isEmpty) {
+            return ""
+        }
         let url = URL(string : urlToMask)
         if (url?.query != nil) {
             let maskedURL = "https://" + "xxxxxxxxxxx" + (url?.path)! + "?" + (url?.query)!
@@ -186,6 +226,7 @@ class SettingsViewController: UITableViewController {
             receiptFieldValue = CYBSMposSettingsLiveReceiptAPIURL
             substituteReceiptFieldValue = CYBSMposSettingsLiveSubstituteReceiptAPIURL
             oAuthTokenFieldValue = "https://auth.ic3.com/apiauth/v1/oauth/token"
+            deviceRegistrationFieldValue = CYBSMposSettingsLiveDeviceRegistrationAPIURL
             //trustServerCertSwitch.isEnabled = false
         }
         else if Settings.getEnvironment() == 1 {
@@ -196,9 +237,10 @@ class SettingsViewController: UITableViewController {
             receiptFieldValue = CYBSMposSettingsTestReceiptAPIURL
             substituteReceiptFieldValue = CYBSMposSettingsTestSubstituteReceiptAPIURL
             oAuthTokenFieldValue = "https://authtest.ic3.com/apiauth/v1/oauth/token"
+            deviceRegistrationFieldValue = CYBSMposSettingsTestDeviceRegistrationAPIURL
             //trustServerCertSwitch.isEnabled = false
         }
-        simpleOrderVerFieldValue = sharedInstance.simpleOrderAPIVersion
+        simpleOrderVerFieldValue = sharedInstance.simpleOrderAPIVersion ?? DefaultSimpleOrderAPIVersion
         if (self.maskSwitch.isOn ) {
             simpleOrderFieldValue = simpleOrderField.text
             transactionSearchFieldValue = transactionSearchField.text
@@ -206,14 +248,29 @@ class SettingsViewController: UITableViewController {
             receiptFieldValue = receiptField.text
             substituteReceiptFieldValue = substituteReceiptField.text
             oAuthTokenFieldValue = oAuthTokenField.text
+            deviceRegistrationFieldValue = deviceRegistrationField.text
             simpleOrderVerFieldValue = simpleOrderVerField.text
-            
-            simpleOrderField.text = getMaskedURL(urlToMask: simpleOrderFieldValue!)
-            transactionSearchField.text = getMaskedURL(urlToMask: transactionSearchFieldValue!)
-            transactionDetailField.text = getMaskedURL(urlToMask: transactionDetailFieldValue!)
-            receiptField.text = getMaskedURL(urlToMask: receiptFieldValue!)
-            substituteReceiptField.text = getMaskedURL(urlToMask: substituteReceiptFieldValue!)
-            oAuthTokenField.text = getMaskedURL(urlToMask: oAuthTokenFieldValue!)
+            if let simpleOrderValue =  simpleOrderFieldValue {
+                simpleOrderField.text = getMaskedURL(urlToMask: simpleOrderValue)
+            }
+            if let transactionSearchValue =  transactionSearchFieldValue {
+                transactionSearchField.text = getMaskedURL(urlToMask: transactionSearchValue)
+            }
+            if let transactionDetailValue =  transactionDetailFieldValue {
+                transactionDetailField.text = getMaskedURL(urlToMask: transactionDetailValue)
+            }
+            if let receiptValue =  receiptFieldValue {
+                receiptField.text = getMaskedURL(urlToMask: receiptValue)
+            }
+            if let substituteReceiptValue =  substituteReceiptFieldValue {
+                substituteReceiptField.text = getMaskedURL(urlToMask: substituteReceiptValue)
+            }
+            if let oAuthTokenValue =  oAuthTokenFieldValue {
+                oAuthTokenField.text = getMaskedURL(urlToMask: oAuthTokenValue)
+            }
+            if let deviceRegistrationValue =  deviceRegistrationFieldValue {
+                deviceRegistrationField.text = getMaskedURL(urlToMask: deviceRegistrationValue)
+            }
             simpleOrderVerField.text = "x.xx"
             
             if ( Settings.getEnvironment() == 2 ) {
@@ -223,8 +280,9 @@ class SettingsViewController: UITableViewController {
                 receiptField.isEnabled = false
                 substituteReceiptField.isEnabled = false
                 oAuthTokenField.isEnabled = false
+                deviceRegistrationField.isEnabled = false
                 trustServerCertSwitch.isEnabled = false
-                simpleOrderVerField.isEnabled = false
+                simpleOrderVerField.isEnabled = true
             }
             
         } else {
@@ -235,6 +293,7 @@ class SettingsViewController: UITableViewController {
                 receiptField.isEnabled = true
                 substituteReceiptField.isEnabled = true
                 oAuthTokenField.isEnabled = true
+                deviceRegistrationField.isEnabled = true
                 trustServerCertSwitch.isEnabled = true
                 simpleOrderVerField.isEnabled = true
             }
@@ -245,6 +304,7 @@ class SettingsViewController: UITableViewController {
             receiptField.text = receiptFieldValue
             substituteReceiptField.text = substituteReceiptFieldValue
             oAuthTokenField.text = oAuthTokenFieldValue
+            deviceRegistrationField.text = deviceRegistrationFieldValue
             simpleOrderVerField.text = simpleOrderVerFieldValue
         }
     }
@@ -259,6 +319,30 @@ class SettingsViewController: UITableViewController {
     
     @IBAction func partialAuthSwitchValueChange(_ sender: UISwitch) {
         Settings.sharedInstance.partialAuthIndicator = sender.isOn
+    }
+    
+    @IBAction func tipSwitchValueChange(_ sender: UISwitch) {
+        Settings.sharedInstance.tipEnabled = sender.isOn
+    }
+    
+    @IBAction func signatureSwitchValueChange(_ sender: UISwitch) {
+        Settings.sharedInstance.signatureEnabled = sender.isOn
+        if Settings.sharedInstance.signatureEnabled == true {
+            minAmountField.isEnabled = true
+        }
+        else {
+            minAmountField.isEnabled = false
+        }
+    }
+    
+    @IBAction func taxSwitchValueChange(_ sender: UISwitch) {
+        Settings.sharedInstance.taxEnabled = sender.isOn
+        if Settings.sharedInstance.taxEnabled == true {
+            taxField.isEnabled = true
+        }
+        else {
+            taxField.isEnabled = false
+        }
     }
     
     @IBOutlet weak var appVersionLabel: UILabel!
@@ -294,6 +378,8 @@ class SettingsViewController: UITableViewController {
         updatePartialAuthIndicator()
         updateCommerceIndicator()
         updateSignature()
+        updateTax()
+        updateTips()
         updateMerchantDefinedData()
         updateUiSettings()
         updateCurrencyUISettings()
@@ -301,6 +387,7 @@ class SettingsViewController: UITableViewController {
     
     func updateAccountSection() {
         let sharedInstance = Settings.sharedInstance
+        storeNameField.text = sharedInstance.storeName
         merchantIdField.text = sharedInstance.merchantID
         deviceIdField.text = sharedInstance.deviceID
         clientIdField.text = sharedInstance.clientID
@@ -318,7 +405,8 @@ class SettingsViewController: UITableViewController {
         receiptField.isEnabled = false
         substituteReceiptField.isEnabled = false
         oAuthTokenField.isEnabled = false
-        simpleOrderVerField.isEnabled = false
+        deviceRegistrationField.isEnabled = false
+        simpleOrderVerField.isEnabled = true
         if Settings.getEnvironment() == 0 {
             // LIVE
             simpleOrderField.text = CYBSMposSettingsLiveSimpleOrderAPIURL
@@ -327,6 +415,7 @@ class SettingsViewController: UITableViewController {
             receiptField.text = CYBSMposSettingsLiveReceiptAPIURL
             substituteReceiptField.text = CYBSMposSettingsLiveSubstituteReceiptAPIURL
             oAuthTokenField.text = "https://auth.ic3.com/apiauth/v1/oauth/token"
+            deviceRegistrationField.text = CYBSMposSettingsLiveDeviceRegistrationAPIURL
             trustServerCertSwitch.isEnabled = false
         }
         else if Settings.getEnvironment() == 1 {
@@ -337,6 +426,7 @@ class SettingsViewController: UITableViewController {
             receiptField.text = CYBSMposSettingsTestReceiptAPIURL
             substituteReceiptField.text = CYBSMposSettingsTestSubstituteReceiptAPIURL
             oAuthTokenField.text = "https://authtest.ic3.com/apiauth/v1/oauth/token"
+            deviceRegistrationField.text = CYBSMposSettingsTestDeviceRegistrationAPIURL
             trustServerCertSwitch.isEnabled = false
         }
         simpleOrderVerField.text = sharedInstance.simpleOrderAPIVersion
@@ -371,6 +461,30 @@ class SettingsViewController: UITableViewController {
     
     func updateSignature() {
         minAmountField.text = String(Settings.sharedInstance.signatureMinAmount)
+        if Settings.sharedInstance.signatureEnabled == true {
+            minAmountField.isEnabled = true
+            signatureSwitch.isOn = true
+        }
+        else {
+            minAmountField.isEnabled = false
+            signatureSwitch.isOn = false
+        }
+    }
+    
+    func updateTax() {
+        taxField.text = Settings.sharedInstance.taxRate ?? "8.25"
+        if Settings.sharedInstance.taxEnabled == true {
+            taxField.isEnabled = true
+        }
+        else {
+            taxField.isEnabled = false
+        }
+        taxSwitch.isOn = Settings.sharedInstance.taxEnabled
+
+    }
+    
+    func updateTips() {
+        tipsSwitch.isOn = Settings.sharedInstance.tipEnabled
     }
     
     func updateMerchantDefinedData() {
@@ -427,6 +541,17 @@ class SettingsViewController: UITableViewController {
         else if indexPath.section == Section.commerceIndicator.rawValue {
             Settings.sharedInstance.commereceIndicator = indexPath.row
         }
+        else if (indexPath.section == Section.about.rawValue) {
+            switch indexPath.row {
+            case 2:
+                performSegue(withIdentifier: "aboutVC", sender: 1)
+                break
+            case 3:
+                performSegue(withIdentifier: "aboutVC", sender: 2)
+                break
+            default: break
+            }
+        }
         tableView.reloadSections([indexPath.section], with: .none)
     }
     
@@ -465,6 +590,15 @@ class SettingsViewController: UITableViewController {
         
         if (indexPath.section == Section.OTA.rawValue || indexPath.section == Section.Address.rawValue) {
             cell.accessoryType = .disclosureIndicator
+        }
+        if (indexPath.section == Section.about.rawValue) {
+            switch indexPath.row {
+            case 2,3:
+                cell.accessoryType = .disclosureIndicator
+                break
+            default:
+                cell.accessoryType = .none
+            }
         }
         return cell
     }
@@ -560,8 +694,211 @@ extension SettingsViewController : UITextFieldDelegate {
             Settings.sharedInstance.blackFont = textField.text; break
         case currencyField:
             Settings.sharedInstance.currency = textField.text?.uppercased(); break
+        case taxField:
+                Settings.sharedInstance.taxRate = textField.text; break
         default:
             break
+        }
+    }
+    
+    func readStoreInfo() {
+        self.copyConfigurationFileIfNeeded()
+        
+        if let path = getDocuemntsFileURL()?.path {
+            do {
+                let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
+                let jsonResult = try JSONSerialization.jsonObject(with: data, options: .mutableLeaves)
+                
+                if  let storeDict = jsonResult as? [String : Any],
+                    let casData = storeDict["LIVE"] as? [[String : Any]] {
+                    self.storesDataLIVE = self.readJsonData(inData: casData)
+                }
+                
+                if  let storeDict = jsonResult as? [String : Any],
+                    let casData = storeDict["CAS"] as? [[String : Any]] {
+                    self.storesDataCAS = self.readJsonData(inData: casData)
+                }
+                
+                if  let storeDict = jsonResult as? [String : Any],
+                    let casData = storeDict["CUSTOM"] as? [[String : Any]] {
+                    self.storesDataCUSTOM = self.readJsonData(inData: casData)
+                }
+            } catch {
+                // handle error
+            }
+        }
+    }
+
+    func readJsonData(inData: [[String : Any]]) -> Array<StoreAttribute> {
+        var resultArray = Array<StoreAttribute> ()
+        
+        for store in inData {
+            let storename = store["Store_Name"] as! String
+            let merchantid = store["CyberSource_MID"] as! String
+            let deviceid = store["Device_ID"] as! String
+            let clientid = store["Client_ID"] as! String
+            let terminalid = store["Terminal_ID"] as! String
+            
+            let data = StoreAttribute(storeName: storename, merchantId: merchantid, deviceId: deviceid, clientId: clientid, terminalId: terminalid)
+            resultArray.append(data)
+        }
+        return resultArray
+    }
+    
+    func getDocuemntsFileURL() -> URL? {
+        let fileManager = FileManager.default
+        
+        let documentsUrl = fileManager.urls(for: .documentDirectory,
+                                            in: .userDomainMask)
+        
+        guard documentsUrl.count != 0 else {
+            return nil// Could not find documents URL
+        }
+        
+        let finalConfigFileURL = documentsUrl.first!.appendingPathComponent("StoresConfiguration.json")
+
+        return finalConfigFileURL
+    }
+    
+    func copyConfigurationFileIfNeeded() {
+        // Move database file from bundle to documents folder
+        
+        let fileManager = FileManager.default
+        
+        let documentsUrl = fileManager.urls(for: .documentDirectory,
+                                            in: .userDomainMask)
+        
+        guard documentsUrl.count != 0 else {
+            return // Could not find documents URL
+        }
+        
+        let finalConfigFileURL = documentsUrl.first!.appendingPathComponent("StoresConfiguration.json")
+        
+        if !( (try? finalConfigFileURL.checkResourceIsReachable()) ?? false) {
+            print("Stores configuration file does not exist in documents folder")
+            
+            let documentsURL = Bundle.main.resourceURL?.appendingPathComponent("StoresConfiguration.json")
+            
+            do {
+                try fileManager.copyItem(atPath: (documentsURL?.path)!, toPath: finalConfigFileURL.path)
+            } catch let error as NSError {
+                print("Couldn't copy file to final location! Error:\(error.description)")
+            }
+            
+        } else {
+            print("Stores configuration file found at path: \(finalConfigFileURL.path)")
+        }
+    }
+    
+        @IBAction func chooseStore(_ sender: AnyObject) {
+        chooseStoreDropDown.show()
+    }
+    
+    func setupStoresDropDown() {
+        self.chooseStoreDropDown.anchorView = self.storeNameField
+        
+        // Will set a custom with instead of anchor view width
+        //        dropDown.width = 100
+        
+        // By default, the dropdown will have its origin on the top left corner of its anchor view
+        // So it will come over the anchor view and hide it completely
+        // If you want to have the dropdown underneath your anchor view, you can do this:
+        chooseStoreDropDown.bottomOffset = CGPoint(x: 0, y: storeNameField.bounds.height)
+        
+        var storeNamesList = Array<String> ()
+        // You can also use localizationKeysDataSource instead. Check the docs.
+        if Settings.getEnvironment() == 0 {
+            //LIVE
+            for store in self.storesDataLIVE {
+                storeNamesList.append(store.storeName)
+            }
+        } else if Settings.getEnvironment() == 1 {
+            //TEST
+            for store in self.storesDataCAS {
+                storeNamesList.append(store.storeName)
+            }
+        } else {
+            //CUSTOM
+            for store in self.storesDataCUSTOM {
+                storeNamesList.append(store.storeName)
+            }
+        }
+        chooseStoreDropDown.dataSource = storeNamesList
+        
+        // Action triggered on selection
+        chooseStoreDropDown.selectionAction = { [weak self] (index, item) in
+            Utils.clearAccessToken()
+            let selectedStoreData = self?.retrieveStoreData(environmnt: Settings.getEnvironment(), selectedStoreName: item)
+            self?.updateStoreData(selectedStoreData: selectedStoreData!)
+        }
+    }
+    
+    func retrieveStoreData(environmnt: Int, selectedStoreName: String) -> StoreAttribute? {
+        var result = StoreAttribute(storeName: "NA", merchantId: "", deviceId: "", clientId: "", terminalId: "")
+        if environmnt == 0 {
+            //LIVE
+            for store in self.storesDataLIVE {
+                if selectedStoreName == store.storeName {
+                    result = store
+                    break
+                }
+            }
+        } else if environmnt == 1 {
+            //TEST
+            for store in self.storesDataCAS {
+                if selectedStoreName == store.storeName {
+                    result = store
+                    break
+                }
+            }
+        } else {
+            //CUSTOM
+            //need different account settings for CUSTOM?
+            for store in self.storesDataCUSTOM {
+                if selectedStoreName == store.storeName {
+                    result = store
+                    break
+                }
+            }
+        }
+        
+        return result
+    }
+    
+    func updateStoreData(selectedStoreData: StoreAttribute) {
+        Settings.sharedInstance.storeName = selectedStoreData.storeName
+        Settings.sharedInstance.merchantID = selectedStoreData.merchantId
+        Settings.sharedInstance.deviceID = selectedStoreData.deviceId
+        Settings.sharedInstance.clientID = selectedStoreData.clientId
+        Settings.sharedInstance.terminalID = selectedStoreData.terminalId
+        
+        self.storeNameField.text = selectedStoreData.storeName
+        self.merchantIdField.text = selectedStoreData.merchantId
+        self.deviceIdField.text = selectedStoreData.deviceId
+        self.clientIdField.text = selectedStoreData.clientId
+        self.terminalIdField.text = selectedStoreData.terminalId
+        
+        Settings.sharedInstance.save()
+    }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "aboutVC" {
+            let vc = segue.destination as! AboutWebViewController
+            if let about = sender as? Int {
+                switch about {
+                case 1:
+                    vc.aboutSection = .PrivacyPolicy
+                    break
+                case 2:
+                    vc.aboutSection = .HelpFeedback
+                    break
+                
+                default:
+                    vc.aboutSection = .PrivacyPolicy
+                }
+                
+                //vc.aboutSection = about
+            }
         }
     }
 }
