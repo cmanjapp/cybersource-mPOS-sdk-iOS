@@ -42,7 +42,7 @@ class AboutWebViewController: UIViewController, WKUIDelegate, WKNavigationDelega
         webView.scrollView.isOpaque = true
         webView.scrollView.showsHorizontalScrollIndicator = true
         webView.scrollView.showsVerticalScrollIndicator = true
-        webView.scrollView.decelerationRate = UIScrollViewDecelerationRateNormal
+        webView.scrollView.decelerationRate = UIScrollView.DecelerationRate.normal
         webView.uiDelegate = self
         webView.navigationDelegate = self
         if let url = self.getURL() {

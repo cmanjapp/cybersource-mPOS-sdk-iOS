@@ -50,6 +50,10 @@
 
 @property (nonatomic, strong, nullable) NSString *paymentMode;
 
+@property (nonatomic, strong, nullable) NSString *entryMode;
+
+@property (nonatomic, strong, nullable) NSString *cardType;
+
 @property (nonatomic, strong, nullable) NSString *suffix;
 
 

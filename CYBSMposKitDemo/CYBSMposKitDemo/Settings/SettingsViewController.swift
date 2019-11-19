@@ -179,7 +179,7 @@ class SettingsViewController: UITableViewController {
         self.view.addGestureRecognizer(tap)
     }
     
-    func dismissKeyboard() {
+    @objc func dismissKeyboard() {
         view.endEditing(true)
         view.resignFirstResponder()
     }
@@ -434,7 +434,7 @@ class SettingsViewController: UITableViewController {
     
     func updateGeneratingAccessTokenSection() {
         // Settings.sharedInstance.generatingAccessTokenMethod
-        tableView.reloadSections([Section.GeneratingAccessToken.rawValue], with: UITableViewRowAnimation.none)
+        tableView.reloadSections([Section.GeneratingAccessToken.rawValue], with: UITableView.RowAnimation.none)
     }
     
     func updatePos() {
@@ -444,11 +444,11 @@ class SettingsViewController: UITableViewController {
     }
 
     func updateDecryptionServices() {
-        tableView.reloadSections([Section.DecryptionServices.rawValue], with: UITableViewRowAnimation.none)
+        tableView.reloadSections([Section.DecryptionServices.rawValue], with: UITableView.RowAnimation.none)
     }
     
     func updateServiceType() {
-        tableView.reloadSections([Section.SupportedServices.rawValue], with: UITableViewRowAnimation.none)
+        tableView.reloadSections([Section.SupportedServices.rawValue], with: UITableView.RowAnimation.none)
     }
     
     func updatePartialAuthIndicator() {
@@ -456,7 +456,7 @@ class SettingsViewController: UITableViewController {
     }
     
     func updateCommerceIndicator() {
-        tableView.reloadSections([Section.commerceIndicator.rawValue], with: UITableViewRowAnimation.none)
+        tableView.reloadSections([Section.commerceIndicator.rawValue], with: UITableView.RowAnimation.none)
     }
     
     func updateSignature() {

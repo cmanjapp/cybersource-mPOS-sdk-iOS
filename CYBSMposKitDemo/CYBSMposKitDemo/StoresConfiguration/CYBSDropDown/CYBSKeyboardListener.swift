@@ -27,23 +27,23 @@ internal final class CYBSKeyboardListener {
 extension CYBSKeyboardListener {
 	
 	func startListeningToKeyboard() {
-		if isListening {
-			return
-		}
-		
-		isListening = true
-		
-		NotificationCenter.default.addObserver(
-			self,
-			selector: #selector(keyboardWillShow(_:)),
-            name: NSNotification.Name.UIKeyboardWillShow,
-			object: nil)
-		NotificationCenter.default.addObserver(
-			self,
-			selector: #selector(keyboardWillHide(_:)),
-            name: NSNotification.Name.UIKeyboardWillHide,
-			object: nil)
-	}
+        if isListening {
+            return
+        }
+        
+        isListening = true
+        
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillShow(_:)),
+            name: UIResponder.keyboardWillShowNotification,
+            object: nil)
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillHide(_:)),
+            name: UIResponder.keyboardWillHideNotification,
+            object: nil)
+    }
 	
 	func stopListeningToKeyboard() {
 		NotificationCenter.default.removeObserver(self)
@@ -62,7 +62,7 @@ extension CYBSKeyboardListener {
 	}
 	
 	fileprivate func keyboardFrame(fromNotification notification: Notification) -> CGRect {
-        return ((notification as NSNotification).userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue ?? CGRect.zero
+        return ((notification as NSNotification).userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue ?? CGRect.zero
 	}
 	
 }

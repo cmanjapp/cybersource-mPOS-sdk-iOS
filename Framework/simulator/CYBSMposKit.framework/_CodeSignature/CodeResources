@@ -6,91 +6,131 @@
 	<dict>
 		<key>Assets.car</key>
 		<data>
-		G8WVUETdtWLRgmgrnFUROOs2s1w=
+		s/2NNM9OV2wF/7xqDWrQpm+TIyw=
 		</data>
 		<key>CYBSMpos.storyboardc/4eS-VA-L0D-view-tFI-Pm-iEC.nib/objects-11.0+.nib</key>
 		<data>
-		99FzeX59rEc2yxow8XbASxVD1e0=
+		ot97NTCleE8Ks4TTcRlADGwFI6Y=
+		</data>
+		<key>CYBSMpos.storyboardc/4eS-VA-L0D-view-tFI-Pm-iEC.nib/objects-13.0+.nib</key>
+		<data>
+		lWlgxCBIFV03tGFdq4n1oeL5lYU=
 		</data>
 		<key>CYBSMpos.storyboardc/4eS-VA-L0D-view-tFI-Pm-iEC.nib/runtime.nib</key>
 		<data>
-		EmoyV/dqoRB/q6EZJWouxS9p9fw=
+		a9s72tJ5onsvWWDvSlLa4hsQbPM=
 		</data>
 		<key>CYBSMpos.storyboardc/CYBSMposCardReaderViewController.nib/objects-11.0+.nib</key>
 		<data>
-		ZPlDWnFwXsz7J1cRTffkbVxBPT8=
+		6JjvVeVDHMaEAQ1OpSzKxUE5OfE=
+		</data>
+		<key>CYBSMpos.storyboardc/CYBSMposCardReaderViewController.nib/objects-13.0+.nib</key>
+		<data>
+		SHfjNpRxCUYkre+2xS7MmQa2tx4=
 		</data>
 		<key>CYBSMpos.storyboardc/CYBSMposCardReaderViewController.nib/runtime.nib</key>
 		<data>
-		RGaMX1LMl5lpsUTq2eypJJooESM=
+		QSGm2MJ6ocVwDgLLVn3XqVKGCIA=
 		</data>
 		<key>CYBSMpos.storyboardc/CYBSMposKeyEntryViewController.nib/objects-11.0+.nib</key>
 		<data>
-		DnqP2s+5NDxN85RLUphmOXKJ8J4=
+		fRsVcGaIMtCdQBgecxIzxQ/iPMk=
+		</data>
+		<key>CYBSMpos.storyboardc/CYBSMposKeyEntryViewController.nib/objects-13.0+.nib</key>
+		<data>
+		e3LnJX+LwLSNc0r4rGaQCJxYHlo=
 		</data>
 		<key>CYBSMpos.storyboardc/CYBSMposKeyEntryViewController.nib/runtime.nib</key>
 		<data>
-		rkSUIsjS2oQMF5nV2+Iupqx3hrY=
+		28NeqOf8JXk1a/T6Uv+wnXMddvc=
 		</data>
 		<key>CYBSMpos.storyboardc/EdR-Ds-n1n-view-k3N-hz-Xid.nib/objects-11.0+.nib</key>
 		<data>
-		t1OGdxTVJVvPjUwSNLYvTkuKJJY=
+		OH0kki/urEaGulS4DuAU4WiQtmA=
+		</data>
+		<key>CYBSMpos.storyboardc/EdR-Ds-n1n-view-k3N-hz-Xid.nib/objects-13.0+.nib</key>
+		<data>
+		k402TNrNpjFO5uAQbIVoUafv/4Q=
 		</data>
 		<key>CYBSMpos.storyboardc/EdR-Ds-n1n-view-k3N-hz-Xid.nib/runtime.nib</key>
 		<data>
-		CtSuefiqiOUZnXMdfNUy+rSEiVM=
+		mF+WaUa/wRqqfAIRfJ6lRGC2hFU=
 		</data>
 		<key>CYBSMpos.storyboardc/Info.plist</key>
 		<data>
-		hR5IL9GemZQsCOR/A8j7VBjkdxk=
+		9hxD+x13xavIGHKdboErMiOHsAg=
 		</data>
 		<key>CYBSMpos.storyboardc/VMposEMVSignatureViewController.nib/objects-11.0+.nib</key>
 		<data>
-		3s1odf+6EL1xU8/2J1gc4ydgUoQ=
+		SnZJAcfJt1Ayy1SKWVguQPSJ/3o=
+		</data>
+		<key>CYBSMpos.storyboardc/VMposEMVSignatureViewController.nib/objects-13.0+.nib</key>
+		<data>
+		7vCayqAhX81jUKHvyUjpl4LJwJE=
 		</data>
 		<key>CYBSMpos.storyboardc/VMposEMVSignatureViewController.nib/runtime.nib</key>
 		<data>
-		592pDNZYeWKjgeqy9jbqGSPO2Us=
+		nejGLfA+Sr8VK5Sh7LNgCAXy6aE=
 		</data>
 		<key>CYBSMpos.storyboardc/VMposReceiptTableViewController.nib/objects-11.0+.nib</key>
 		<data>
-		DceBN9L5QMWIAGhkuGmHtN1pgZw=
+		+hBVboq9XetnaaxIWGLUceRGUEw=
+		</data>
+		<key>CYBSMpos.storyboardc/VMposReceiptTableViewController.nib/objects-13.0+.nib</key>
+		<data>
+		Y0p81aZk/0WmzmXhPc815GCjZGE=
 		</data>
 		<key>CYBSMpos.storyboardc/VMposReceiptTableViewController.nib/runtime.nib</key>
 		<data>
-		zlUCCJfQM914cyFSe5VpcETeTUk=
+		Q5dcuiAQrVixpYF6i4qEJn8bhhA=
 		</data>
 		<key>CYBSMpos.storyboardc/WQY-3S-XYT-view-qs5-kW-HPz.nib/objects-11.0+.nib</key>
 		<data>
-		v2BCb2+vvUbG0TNlmv5VQm32lGk=
+		kxvb0KTGfE3L/L4rWEfjanUlERs=
+		</data>
+		<key>CYBSMpos.storyboardc/WQY-3S-XYT-view-qs5-kW-HPz.nib/objects-13.0+.nib</key>
+		<data>
+		HTfMNvEAy+aKoFVOHHNkoNztBIk=
 		</data>
 		<key>CYBSMpos.storyboardc/WQY-3S-XYT-view-qs5-kW-HPz.nib/runtime.nib</key>
 		<data>
-		CzjiWNKs/ThVFQ2KXGQcV4OI7+4=
+		91xjsqYEDns9CpNnm+/p3848fkk=
 		</data>
 		<key>CYBSMpos.storyboardc/addressViewController.nib/objects-11.0+.nib</key>
 		<data>
-		CnB4yESUZTbqzHZ+lkiMA5OG4l8=
+		HGlCWKjz8J7XbfyTLTffsZsXg+U=
+		</data>
+		<key>CYBSMpos.storyboardc/addressViewController.nib/objects-13.0+.nib</key>
+		<data>
+		Smjwc0Tqk8z3ruBn1qa4AKsbgCk=
 		</data>
 		<key>CYBSMpos.storyboardc/addressViewController.nib/runtime.nib</key>
 		<data>
-		MZMxL/mwK3E9e94NckfrxmWLyz0=
+		BF1v5TKQBS/atOEhqTAO+e6qnas=
 		</data>
 		<key>CYBSMpos.storyboardc/fXM-DW-q9c-view-xyw-HJ-41o.nib/objects-11.0+.nib</key>
 		<data>
-		imIeDX2j4tAXOUY3fXQsotWtCYA=
+		IPB1Bq8TLHbuWZGsLx5XqBYsLPc=
+		</data>
+		<key>CYBSMpos.storyboardc/fXM-DW-q9c-view-xyw-HJ-41o.nib/objects-13.0+.nib</key>
+		<data>
+		nKk23v+ig/YpZIoQjb17V4vSAxs=
 		</data>
 		<key>CYBSMpos.storyboardc/fXM-DW-q9c-view-xyw-HJ-41o.nib/runtime.nib</key>
 		<data>
-		AQxJZdQKExsRyFb0vQUrOZaQKqE=
+		CUJy/xM8Vix3HaVK5Mmy+6gXmkk=
 		</data>
 		<key>CYBSMpos.storyboardc/zzV-PZ-XZr-view-J3b-Ao-5kw.nib/objects-11.0+.nib</key>
 		<data>
-		wBwilHDw0AKhypN65cDa2gUkY7w=
+		j/wC+vFz+aDj92Qzde10yI7DYfo=
+		</data>
+		<key>CYBSMpos.storyboardc/zzV-PZ-XZr-view-J3b-Ao-5kw.nib/objects-13.0+.nib</key>
+		<data>
+		l7F8MTstfXyntScW/V72EXwf2uM=
 		</data>
 		<key>CYBSMpos.storyboardc/zzV-PZ-XZr-view-J3b-Ao-5kw.nib/runtime.nib</key>
 		<data>
-		nCRZ/t09EoOa3F7KpDbMBbPXwx8=
+		pbmP58fV6YBrK+qSbBK+q2dLJjQ=
 		</data>
 		<key>CurrencyCodes.plist</key>
 		<data>
@@ -138,7 +178,7 @@
 		</data>
 		<key>Headers/CYBSMposManager.h</key>
 		<data>
-		he6WkHMvu/CEn/UFX1HF51tsM/4=
+		wUlnhHbQgL/+Kz9iPlrCeGYBjHQ=
 		</data>
 		<key>Headers/CYBSMposPaymentRequest.h</key>
 		<data>
@@ -154,11 +194,15 @@
 		</data>
 		<key>Headers/CYBSMposReceiptRequest.h</key>
 		<data>
-		dJmjSM9BybRE+5FuATwOXmbSB4Y=
+		7JCVXEBdJBt0Iue6qpJEEpeejdo=
 		</data>
 		<key>Headers/CYBSMposRefundRequest.h</key>
 		<data>
 		gWbyuDWhkjc/SSdFyDa7qPxw7P8=
+		</data>
+		<key>Headers/CYBSMposRegisterDeviceResponse.h</key>
+		<data>
+		b73YYe0EzGVjXlGKZ0rqgU4LAi0=
 		</data>
 		<key>Headers/CYBSMposSettings.h</key>
 		<data>
@@ -190,7 +234,7 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		5F8EmLKXwiQnSu/2j44DtS3cA4M=
+		FZpIJA3ngKu1jV0YGvbynAPmCCk=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -203,242 +247,352 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			G8WVUETdtWLRgmgrnFUROOs2s1w=
+			s/2NNM9OV2wF/7xqDWrQpm+TIyw=
 			</data>
 			<key>hash2</key>
 			<data>
-			gDZ0aBH3g7lOuz7T/ynLhbeYzZjORqpcJSH0m/XAegE=
+			C0uGpeKVG5h0XVBrGv2xmEhM0vKn9Wi85Ll7R7jjMPE=
 			</data>
 		</dict>
 		<key>CYBSMpos.storyboardc/4eS-VA-L0D-view-tFI-Pm-iEC.nib/objects-11.0+.nib</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			99FzeX59rEc2yxow8XbASxVD1e0=
+			ot97NTCleE8Ks4TTcRlADGwFI6Y=
 			</data>
 			<key>hash2</key>
 			<data>
-			ko4BQtkA3M48lGuoqikpzMsIaKi43v/LHTVD8dkKYE0=
+			r/+3r2WHktOZSsx4za4m6oVvE/uc0HKGL4Bs4fOEiv4=
+			</data>
+		</dict>
+		<key>CYBSMpos.storyboardc/4eS-VA-L0D-view-tFI-Pm-iEC.nib/objects-13.0+.nib</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			lWlgxCBIFV03tGFdq4n1oeL5lYU=
+			</data>
+			<key>hash2</key>
+			<data>
+			4QScFmTO3NNEC5tO+gb8wda+MyfMug37yGA5ISYD+Fs=
 			</data>
 		</dict>
 		<key>CYBSMpos.storyboardc/4eS-VA-L0D-view-tFI-Pm-iEC.nib/runtime.nib</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			EmoyV/dqoRB/q6EZJWouxS9p9fw=
+			a9s72tJ5onsvWWDvSlLa4hsQbPM=
 			</data>
 			<key>hash2</key>
 			<data>
-			7DJJ448wnGNyE+gRgJ35mPJuF9t18kGAMwlo8ZhLW8o=
+			m1NXyoeGuojHiSJ6iJOxqKUOTmS8zrfNFv7pWk2K42U=
 			</data>
 		</dict>
 		<key>CYBSMpos.storyboardc/CYBSMposCardReaderViewController.nib/objects-11.0+.nib</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			ZPlDWnFwXsz7J1cRTffkbVxBPT8=
+			6JjvVeVDHMaEAQ1OpSzKxUE5OfE=
 			</data>
 			<key>hash2</key>
 			<data>
-			5da3RqjlLLBKCD6kSLZjYAX0mEv5GuiCt+GThJMdwIk=
+			XIErpPYaBJdNXWe2xvkNibuEkljgiyWQ8xocdzGZHX4=
+			</data>
+		</dict>
+		<key>CYBSMpos.storyboardc/CYBSMposCardReaderViewController.nib/objects-13.0+.nib</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			SHfjNpRxCUYkre+2xS7MmQa2tx4=
+			</data>
+			<key>hash2</key>
+			<data>
+			8mMHypGgpoWhgshtDlFWSk5i6xIzkZ+cI90Q4i1x7+w=
 			</data>
 		</dict>
 		<key>CYBSMpos.storyboardc/CYBSMposCardReaderViewController.nib/runtime.nib</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			RGaMX1LMl5lpsUTq2eypJJooESM=
+			QSGm2MJ6ocVwDgLLVn3XqVKGCIA=
 			</data>
 			<key>hash2</key>
 			<data>
-			9J+4vlVWAFJtw/WxtUqDMM6Hwm97RdLu9n78hEU/oLs=
+			zEQu3uJ29HzlXdq1biDCnD8zCEl40Ofl+QTqB/kohkc=
 			</data>
 		</dict>
 		<key>CYBSMpos.storyboardc/CYBSMposKeyEntryViewController.nib/objects-11.0+.nib</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			DnqP2s+5NDxN85RLUphmOXKJ8J4=
+			fRsVcGaIMtCdQBgecxIzxQ/iPMk=
 			</data>
 			<key>hash2</key>
 			<data>
-			KYb1lqfTmk6Ni3y2+GuKmc2Kc/xIbzuu3A4CqrkHPeE=
+			wM11hP/fmpN3bckxD/3otGjBZg3IX9/iylbmR3Nlhsw=
+			</data>
+		</dict>
+		<key>CYBSMpos.storyboardc/CYBSMposKeyEntryViewController.nib/objects-13.0+.nib</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			e3LnJX+LwLSNc0r4rGaQCJxYHlo=
+			</data>
+			<key>hash2</key>
+			<data>
+			tgnrynexw3sgYrB5LiVnAp63+qIvI7dgmRG7uHaKSDg=
 			</data>
 		</dict>
 		<key>CYBSMpos.storyboardc/CYBSMposKeyEntryViewController.nib/runtime.nib</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			rkSUIsjS2oQMF5nV2+Iupqx3hrY=
+			28NeqOf8JXk1a/T6Uv+wnXMddvc=
 			</data>
 			<key>hash2</key>
 			<data>
-			sk2bQGa+ERDkZbCM33lQdQZXNrQLWvWIAfHj/Clis7U=
+			hM7TVgkuWkZTJAPxT0dW22Infp6wXkaINqQTqHDTbhg=
 			</data>
 		</dict>
 		<key>CYBSMpos.storyboardc/EdR-Ds-n1n-view-k3N-hz-Xid.nib/objects-11.0+.nib</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			t1OGdxTVJVvPjUwSNLYvTkuKJJY=
+			OH0kki/urEaGulS4DuAU4WiQtmA=
 			</data>
 			<key>hash2</key>
 			<data>
-			Oj5d/eKz1OuP3HF+w5NZ3H0UN5UnpnTewhSFqW2WVDI=
+			3qvb2TVSEFP6AM06yAjhCDjJu0TyK8MtdrvhsF2upBA=
+			</data>
+		</dict>
+		<key>CYBSMpos.storyboardc/EdR-Ds-n1n-view-k3N-hz-Xid.nib/objects-13.0+.nib</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			k402TNrNpjFO5uAQbIVoUafv/4Q=
+			</data>
+			<key>hash2</key>
+			<data>
+			I4Ig9sQfLp7Vvjp3HDXsQrolpiI1Ac8rEP22wPDmPAY=
 			</data>
 		</dict>
 		<key>CYBSMpos.storyboardc/EdR-Ds-n1n-view-k3N-hz-Xid.nib/runtime.nib</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			CtSuefiqiOUZnXMdfNUy+rSEiVM=
+			mF+WaUa/wRqqfAIRfJ6lRGC2hFU=
 			</data>
 			<key>hash2</key>
 			<data>
-			7RI28kcu9GVNffQqTWuOvfhd4wD/DsrDg/jjntLCRP4=
+			a2bhjgUFR2y5K/9BOfKX/fib2fj9V+KD1ub0MsdRrTk=
 			</data>
 		</dict>
 		<key>CYBSMpos.storyboardc/Info.plist</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			hR5IL9GemZQsCOR/A8j7VBjkdxk=
+			9hxD+x13xavIGHKdboErMiOHsAg=
 			</data>
 			<key>hash2</key>
 			<data>
-			fkPVcRaxVBI0/OzSXmiZpz4YVuoNpQhLlShrkVDL/yI=
+			jWgh3ObLQDKYAudU3+k0AOk19dt/313BDf/kwXLImNw=
 			</data>
 		</dict>
 		<key>CYBSMpos.storyboardc/VMposEMVSignatureViewController.nib/objects-11.0+.nib</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			3s1odf+6EL1xU8/2J1gc4ydgUoQ=
+			SnZJAcfJt1Ayy1SKWVguQPSJ/3o=
 			</data>
 			<key>hash2</key>
 			<data>
-			bE27H/4NJUsBxoxthIjFmYbPS95rKV8LgtTre8VUm0I=
+			vom03EhD9zev284aK99NngEHqVK4GGhHb/AkbOVDreM=
+			</data>
+		</dict>
+		<key>CYBSMpos.storyboardc/VMposEMVSignatureViewController.nib/objects-13.0+.nib</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			7vCayqAhX81jUKHvyUjpl4LJwJE=
+			</data>
+			<key>hash2</key>
+			<data>
+			lZuQSsIHcPV0hyj5RWqOmwC5J8IDNXwa7tEl5L+VT8Q=
 			</data>
 		</dict>
 		<key>CYBSMpos.storyboardc/VMposEMVSignatureViewController.nib/runtime.nib</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			592pDNZYeWKjgeqy9jbqGSPO2Us=
+			nejGLfA+Sr8VK5Sh7LNgCAXy6aE=
 			</data>
 			<key>hash2</key>
 			<data>
-			zn554pipBUDX6UC5vnYoo/S21MKfpN+Dpg0vrb4xnec=
+			ZMZJXvV8uNS25d4uHJaySXTZMDn3uo7sCYW1XWjcqBI=
 			</data>
 		</dict>
 		<key>CYBSMpos.storyboardc/VMposReceiptTableViewController.nib/objects-11.0+.nib</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			DceBN9L5QMWIAGhkuGmHtN1pgZw=
+			+hBVboq9XetnaaxIWGLUceRGUEw=
 			</data>
 			<key>hash2</key>
 			<data>
-			kH6e+jM1JtAmiTzt7dgBDssFqFbvtIcDmWG4B0NQ9vE=
+			nvreivietzV3YEsCnSiKl877wi2fRhpLazQuOdPBxjs=
+			</data>
+		</dict>
+		<key>CYBSMpos.storyboardc/VMposReceiptTableViewController.nib/objects-13.0+.nib</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			Y0p81aZk/0WmzmXhPc815GCjZGE=
+			</data>
+			<key>hash2</key>
+			<data>
+			C2WgWoCr2kjlKGZE4N8mHrSLs5k13jbRHFItaOSj8k8=
 			</data>
 		</dict>
 		<key>CYBSMpos.storyboardc/VMposReceiptTableViewController.nib/runtime.nib</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			zlUCCJfQM914cyFSe5VpcETeTUk=
+			Q5dcuiAQrVixpYF6i4qEJn8bhhA=
 			</data>
 			<key>hash2</key>
 			<data>
-			VkCYdZK+F93cymj26/ENQJ9Me6doysvZam7IjsManSA=
+			zAiGPGb40VDBXHxjLB+uF4ilOpGpIDadDtf6EGRgERo=
 			</data>
 		</dict>
 		<key>CYBSMpos.storyboardc/WQY-3S-XYT-view-qs5-kW-HPz.nib/objects-11.0+.nib</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			v2BCb2+vvUbG0TNlmv5VQm32lGk=
+			kxvb0KTGfE3L/L4rWEfjanUlERs=
 			</data>
 			<key>hash2</key>
 			<data>
-			uoFiYHTgcoWs0LQ/yDCKR4KElIZtGyN97QlgkAc2wK8=
+			03Jg+q/neiY9SBunWj1SgbPQRgqGdiOlucoLsdCcKME=
+			</data>
+		</dict>
+		<key>CYBSMpos.storyboardc/WQY-3S-XYT-view-qs5-kW-HPz.nib/objects-13.0+.nib</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			HTfMNvEAy+aKoFVOHHNkoNztBIk=
+			</data>
+			<key>hash2</key>
+			<data>
+			/Su8jWmJXDJj5FdOKluIFSEoLFbd6FFX1UbbAGCg0l0=
 			</data>
 		</dict>
 		<key>CYBSMpos.storyboardc/WQY-3S-XYT-view-qs5-kW-HPz.nib/runtime.nib</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			CzjiWNKs/ThVFQ2KXGQcV4OI7+4=
+			91xjsqYEDns9CpNnm+/p3848fkk=
 			</data>
 			<key>hash2</key>
 			<data>
-			7d1Z1eHr8jJeGqQzr3XhuaR6gPBcyJP2LUQVZDQ4ets=
+			YtqdbCFMdivRQYT97ZXe8qDGB2CM2AE6gxy74Ijz61w=
 			</data>
 		</dict>
 		<key>CYBSMpos.storyboardc/addressViewController.nib/objects-11.0+.nib</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			CnB4yESUZTbqzHZ+lkiMA5OG4l8=
+			HGlCWKjz8J7XbfyTLTffsZsXg+U=
 			</data>
 			<key>hash2</key>
 			<data>
-			ug5nX0sSCk3BNf7SK7i8n0M1lFAX3COKtzDttRCCIRE=
+			pTQqz0PVaDfZFijuIwbBt59iNXFBwOBCXeFkJSlvGH4=
+			</data>
+		</dict>
+		<key>CYBSMpos.storyboardc/addressViewController.nib/objects-13.0+.nib</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			Smjwc0Tqk8z3ruBn1qa4AKsbgCk=
+			</data>
+			<key>hash2</key>
+			<data>
+			52v4Ti2jUFyfg5Dv+vnqFjrzuNBzmcdgiypa/6xkO0w=
 			</data>
 		</dict>
 		<key>CYBSMpos.storyboardc/addressViewController.nib/runtime.nib</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			MZMxL/mwK3E9e94NckfrxmWLyz0=
+			BF1v5TKQBS/atOEhqTAO+e6qnas=
 			</data>
 			<key>hash2</key>
 			<data>
-			jHRFTLfVlheMU7nai5ij0c20H3JWA88PK7MFMLD6lO0=
+			h4x8EZWlMiuGUdNfbvcS8x9aWYzEDPOpB6UnJQllrFs=
 			</data>
 		</dict>
 		<key>CYBSMpos.storyboardc/fXM-DW-q9c-view-xyw-HJ-41o.nib/objects-11.0+.nib</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			imIeDX2j4tAXOUY3fXQsotWtCYA=
+			IPB1Bq8TLHbuWZGsLx5XqBYsLPc=
 			</data>
 			<key>hash2</key>
 			<data>
-			5MYwSvh204/Dk4MqnAdzG9xRhYhAEL4DlDOoG9XsszI=
+			o5FOyGCOpkvAgtrKZDj5Dd8aCvdVgIYyn2nLJfb0BpM=
+			</data>
+		</dict>
+		<key>CYBSMpos.storyboardc/fXM-DW-q9c-view-xyw-HJ-41o.nib/objects-13.0+.nib</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			nKk23v+ig/YpZIoQjb17V4vSAxs=
+			</data>
+			<key>hash2</key>
+			<data>
+			o4gHGhk6QS76RLvWzDax2bjRWmLnS/YXFqeQcLWW/ro=
 			</data>
 		</dict>
 		<key>CYBSMpos.storyboardc/fXM-DW-q9c-view-xyw-HJ-41o.nib/runtime.nib</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			AQxJZdQKExsRyFb0vQUrOZaQKqE=
+			CUJy/xM8Vix3HaVK5Mmy+6gXmkk=
 			</data>
 			<key>hash2</key>
 			<data>
-			shotaFrA7r/hajIr8uNC0FVvLmJ8Gx882p59quChCs0=
+			6EnoeDXsCKBC2CtF5+0lk7WqpvIlalTG0p5x7GaZ2IQ=
 			</data>
 		</dict>
 		<key>CYBSMpos.storyboardc/zzV-PZ-XZr-view-J3b-Ao-5kw.nib/objects-11.0+.nib</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			wBwilHDw0AKhypN65cDa2gUkY7w=
+			j/wC+vFz+aDj92Qzde10yI7DYfo=
 			</data>
 			<key>hash2</key>
 			<data>
-			Q2uWHGRFoQRTAGD2FiTZEqCdHdRODziC5sSpEoMYrlA=
+			grmP8ClIMZA4BRElgeLFqOVzRfIyzaBhy1KMY7r4Qbk=
+			</data>
+		</dict>
+		<key>CYBSMpos.storyboardc/zzV-PZ-XZr-view-J3b-Ao-5kw.nib/objects-13.0+.nib</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			l7F8MTstfXyntScW/V72EXwf2uM=
+			</data>
+			<key>hash2</key>
+			<data>
+			wPWL4jHFM2DaTwU2aTX4VmY4xVCp7yp4TsnHrr8uqb8=
 			</data>
 		</dict>
 		<key>CYBSMpos.storyboardc/zzV-PZ-XZr-view-J3b-Ao-5kw.nib/runtime.nib</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			nCRZ/t09EoOa3F7KpDbMBbPXwx8=
+			pbmP58fV6YBrK+qSbBK+q2dLJjQ=
 			</data>
 			<key>hash2</key>
 			<data>
-			qypUvftD8tfLy6Uzk3OXNIlPVlKy3rzQqH2Ck6EY4o0=
+			CiF5C6uf2jelg6r6gV+C6IVMclHxkdzusoPccH4svZg=
 			</data>
 		</dict>
 		<key>CurrencyCodes.plist</key>
@@ -566,11 +720,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			he6WkHMvu/CEn/UFX1HF51tsM/4=
+			wUlnhHbQgL/+Kz9iPlrCeGYBjHQ=
 			</data>
 			<key>hash2</key>
 			<data>
-			qRe9jYBLpxsEzzyQpUgoyxGOC/Ntj/vc/cvA7MkLKu8=
+			AIqw2y4Q+FhCmDrm7+0fADgZH6Mo9+69HDF6XQVcoO4=
 			</data>
 		</dict>
 		<key>Headers/CYBSMposPaymentRequest.h</key>
@@ -610,11 +764,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			dJmjSM9BybRE+5FuATwOXmbSB4Y=
+			7JCVXEBdJBt0Iue6qpJEEpeejdo=
 			</data>
 			<key>hash2</key>
 			<data>
-			7fcqWqo/ciDU2Z9rDBKx5qYNy7MTlENynbtb8nKQD04=
+			O0exnSzdocBZDuZaeRZ6TNDgpAJShZt6aCDYIrStRTc=
 			</data>
 		</dict>
 		<key>Headers/CYBSMposRefundRequest.h</key>
@@ -626,6 +780,17 @@
 			<key>hash2</key>
 			<data>
 			67RWMj3NBzaXAjaNLJlhHmJI7itR3nUIhOGPQl8OLOU=
+			</data>
+		</dict>
+		<key>Headers/CYBSMposRegisterDeviceResponse.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			b73YYe0EzGVjXlGKZ0rqgU4LAi0=
+			</data>
+			<key>hash2</key>
+			<data>
+			TJatSkdb9+rsAIURoH0bvGRLUha2sioxjo1nN8ckavM=
 			</data>
 		</dict>
 		<key>Headers/CYBSMposSettings.h</key>
@@ -719,7 +884,7 @@
 	</dict>
 	<key>rules</key>
 	<dict>
-		<key>^</key>
+		<key>^.*</key>
 		<true/>
 		<key>^.*\.lproj/</key>
 		<dict>
@@ -750,24 +915,12 @@
 			<key>weight</key>
 			<real>11</real>
 		</dict>
-		<key>^</key>
-		<dict>
-			<key>weight</key>
-			<real>20</real>
-		</dict>
 		<key>^(.*/)?\.DS_Store$</key>
 		<dict>
 			<key>omit</key>
 			<true/>
 			<key>weight</key>
 			<real>2000</real>
-		</dict>
-		<key>^(Frameworks|SharedFrameworks|PlugIns|Plug-ins|XPCServices|Helpers|MacOS|Library/(Automator|Spotlight|LoginItems))/</key>
-		<dict>
-			<key>nested</key>
-			<true/>
-			<key>weight</key>
-			<real>10</real>
 		</dict>
 		<key>^.*</key>
 		<true/>
@@ -803,13 +956,6 @@
 			<true/>
 			<key>weight</key>
 			<real>20</real>
-		</dict>
-		<key>^[^/]+$</key>
-		<dict>
-			<key>nested</key>
-			<true/>
-			<key>weight</key>
-			<real>10</real>
 		</dict>
 		<key>^embedded\.provisionprofile$</key>
 		<dict>

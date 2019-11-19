@@ -148,27 +148,33 @@ class DeviceManagementViewController: UITableViewController,CYBSMposManagerDeleg
         return false
     }
     
-    func onDeviceRegister(_ responseData: Error) {
+    func onDeviceRegister(_ responseData: CYBSMposRegisterDeviceResponse?, error: Error?) {
         self.spinner.stopAnimating()
-        let deviceRegisterResponse = responseData
-        if (deviceRegisterResponse._code == 200) {
-            var statusStr = String()
-            var deviceStr = String()
-
-            if let message = deviceRegisterResponse._userInfo!["status"] as? String {
-                statusStr = "Status: " + String(describing: message)
+        if let deviceRegisterResponse = responseData {
+            switch(deviceRegisterResponse.status){
+            case .setupReady:
+                self.showAlert("Device Registration", message:"Setup Ready :\(String(describing: deviceRegisterResponse.message ?? "" ))")
+                break
+            case .pending:
+                self.showAlert("Device Registration", message:"Pending :\(String(describing: deviceRegisterResponse.message ?? "" ))")
+                break
+            case .unknown:
+                self.showAlert("Device Registration", message:"Unknown Error :\(String(describing: deviceRegisterResponse.message ?? "" ))")
+                break
+            case .disabled:
+                self.showAlert("Device Registration", message:"Disabled :\(String(describing: deviceRegisterResponse.message ?? "" ))")
+                break
+            case .failed:
+                self.showAlert("Device Registration", message:"Failed :\(String(describing: deviceRegisterResponse.message ?? "" ))")
+                break
+            @unknown default:
+                self.showAlert("Error", message: (deviceRegisterResponse.message) ?? "Error Occurred :: HTTP Code \(String(describing: deviceRegisterResponse.message ?? "" ))")
+                break
             }
-            if let dId = deviceRegisterResponse._userInfo!["device_id"] as? String {
-                deviceStr = "Device: " + String(describing: dId)
-                Settings.sharedInstance.deviceID = dId
-                Settings.sharedInstance.save()
-                self.deviceIdTextField.text = dId
-            }
-            self.showAlert("Registration successfull!", message: deviceStr + "\n" + statusStr)
-        } else {
-            self.showAlert("Device Registration Response", message: (deviceRegisterResponse._userInfo!["error_description"] as? String) ?? "Error Occurred :: HTTP Code \(deviceRegisterResponse._code)")
         }
-        NSLog("DeviceRegisterCallBack")
+        else {
+            self.showAlert("Device Registration Error", message: "Error Occurred ::  \(String(error?.localizedDescription ?? ""))")
+        }
     }
     
     func showAlert(_ title: String, message: String) {

@@ -398,7 +398,7 @@ class PlaceOrderViewController: UIViewController, UITextFieldDelegate, UITableVi
         self.deviceInfoLabel.text = ""
         if(sender.titleLabel?.text?.elementsEqual("Disconnect BT"))!{
             sender.setTitle("Scan BT devices", for: .normal)
-            self.manager.disconenctBTDevice(self)
+            self.manager.disconnectBTDevice(self)
             let view = self.view as! PlaceOrderView
             view.bluetoothBtn.setTitle("Scan BT Devices", for: .normal)
             deviceList = [CYBSMposBluetoothDevice]()
@@ -451,8 +451,8 @@ class PlaceOrderViewController: UIViewController, UITextFieldDelegate, UITableVi
         }
     }
 
-    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
-        return UITableViewCellEditingStyle.none
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        return UITableViewCell.EditingStyle.none
     }
         
     // MARK: -
@@ -513,6 +513,21 @@ class PlaceOrderViewController: UIViewController, UITextFieldDelegate, UITableVi
             }
             itemsList.append(lineItem)
         }
+        if self.subTotalLabel.text != "" && itemsList.count == 0 {
+            let subTotal:Float = Float(self.subTotalLabel.text!) ?? 0.0
+            if subTotal != 0.0 {
+                var subtotalAmount:NSDecimalNumber = 0.0
+                subtotalAmount = NSDecimalNumber(value: subTotal)
+                let lineItem = CYBSMposItem()
+                lineItem.name = "Goods Services"
+                lineItem.quantity = 1
+                lineItem.price = subtotalAmount
+                itemsList.append(lineItem)
+
+            }
+            
+        }
+        
         return itemsList
     }
     
@@ -577,7 +592,7 @@ class PlaceOrderViewController: UIViewController, UITextFieldDelegate, UITableVi
     func continueTransaction(cardData: CYBSMposCardDataManual?) {
         if let cardEntryData = cardData {
             self.spinner.startAnimating()
-            self.spinner.bringSubview(toFront: self.view)
+            self.spinner.bringSubviewToFront(self.view)
             Utils.createAccessToken { (accessToken, error) in
                 if let accessToken = accessToken {
                     self.accessToken = accessToken
@@ -657,7 +672,7 @@ extension PlaceOrderViewController : CYBSMposManagerDelegate {
     
     func onBTDisconnected() {
         let view = self.view as! PlaceOrderView
-        view.bluetoothBtn.setTitle("Scan BT Devices", for:UIControlState.normal)
+        view.bluetoothBtn.setTitle("Scan BT Devices", for:UIControl.State.normal)
         deviceList = [CYBSMposBluetoothDevice]()
         view.resultTableView.reloadData()
         view.payByCardReaderButton.isEnabled = false
@@ -674,7 +689,7 @@ extension PlaceOrderViewController : CYBSMposManagerDelegate {
     func onBTConnected() {
         self.spinner.stopAnimating()
         let view = self.view as! PlaceOrderView
-        view.bluetoothBtn.setTitle("Disconnect BT", for:UIControlState.normal)
+        view.bluetoothBtn.setTitle("Disconnect BT", for:UIControl.State.normal)
         self.audioBtn.isEnabled = false
         self.audioBtn.backgroundColor = UIColor(red: 192/255.0, green: 192/255.0, blue: 192/255.0, alpha: 0.5)
         view.payByCardReaderButton.isEnabled = true
@@ -759,7 +774,6 @@ extension PlaceOrderViewController : CYBSMposManagerDelegate {
             return
         }
         let result = result!
-        print("Received payment response: \(result.description)")
         guard error == nil else {
             return
         }
@@ -775,32 +789,44 @@ extension PlaceOrderViewController : CYBSMposManagerDelegate {
         emailAlertController.addAction(skipAction)
         let doneAction = UIAlertAction(title: "Done", style: .default) { [unowned self](action) in
             if let toEmailAddress = emailAlertController.textFields![0].text {
-                let receiptRequest = CYBSMposReceiptRequest(
-                    toEmail: toEmailAddress,
-                    fromEmail: "no-reply@cybersource.com",
-                    emailSubject: "Your Transaction Receipt",
-                    merchantDescriptor: "CyberSource",
-                    merchantDescriptorStreet: "P.O. Box 8999",
-                    merchantDescriptorCity: "San Francisco",
-                    merchantDescriptorState: "CA",
-                    merchantDescriptorPostalCode: "94128-8999",
-                    merchantDescriptorCountry: "USA",
-                    merchantReferenceCode: result.merchantReferenceCode ?? "",
-                    authCode: result.authorizationCode ?? "",
-                    shippingAmount: "USD $0.00",
-                    taxAmount: String(format: "%.2f", CartData.sharedInstance.taxTotalAmount),
-                    totalPurchaseAmount: self.subTotalLabel.text ?? "0.00",
-                    subscriptionID: result.subscriptionID ?? "",
-                    accessToken: self.accessToken ?? ""
-                )
-                receiptRequest.items = self.getItemsList()
-                receiptRequest.emvTags = self.transactionResponse?.emvReply?.emvTags as? [Any]
-                receiptRequest.suffix = self.transactionResponse?.card?.suffix
-                receiptRequest.paymentMode = self.transactionResponse?.entryMode
                 
-                self.spinner.startAnimating()
-                
-                self.manager.sendReceipt(receiptRequest, delegate: self)
+                if self.transactionRequest?.entryMode == .appKeyEntry {
+                    let receiptRequest = CYBSMposReceiptRequest(transactionID: result.requestID ?? "", toEmail: toEmailAddress, accessToken: self.accessToken ?? "")
+                                   self.spinner.startAnimating()
+                                   
+                                   self.manager.sendReceipt(receiptRequest, delegate: self)
+                }
+                else {
+                    let receiptRequest = CYBSMposReceiptRequest(
+                                       toEmail: toEmailAddress,
+                                       fromEmail: "no-reply@cybersource.com",
+                                       emailSubject: "Your Transaction Receipt",
+                                       merchantDescriptor: "CyberSource",
+                                       merchantDescriptorStreet: "P.O. Box 8999",
+                                       merchantDescriptorCity: "San Francisco",
+                                       merchantDescriptorState: "CA",
+                                       merchantDescriptorPostalCode: "94128-8999",
+                                       merchantDescriptorCountry: "USA",
+                                       merchantReferenceCode: result.merchantReferenceCode ?? "",
+                                       authCode: result.authorizationCode ?? "",
+                                       shippingAmount: "USD $0.00",
+                                       taxAmount: String(format: "%.2f", CartData.sharedInstance.taxTotalAmount),
+                                       totalPurchaseAmount: self.subTotalLabel.text ?? "0.00",
+                                       subscriptionID: result.subscriptionID ?? "",
+                                       accessToken: self.accessToken ?? ""
+                                   )
+                                   receiptRequest.items = self.getItemsList()
+                                   receiptRequest.emvTags = self.transactionResponse?.emvReply?.emvTags as? [Any]
+                                   receiptRequest.suffix = self.transactionResponse?.card?.suffix
+                                   receiptRequest.paymentMode = self.transactionResponse?.entryMode
+                                   receiptRequest.entryMode =  self.transactionResponse?.entryMode
+                                   receiptRequest.cardType = self.transactionResponse?.card?.registeredApplicationProviderId
+                                   
+                                   self.spinner.startAnimating()
+                                   
+                                   self.manager.sendReceipt(receiptRequest, delegate: self)
+                }
+               
             }
         }
         emailAlertController.addAction(doneAction)

@@ -760,7 +760,7 @@ extension CYBSDropDown {
 		for index in 0..<dataSource.count {
 			configureCell(templateCell, at: index)
 			templateCell.bounds.size.height = cellHeight
-            let width = templateCell.systemLayoutSizeFitting(UILayoutFittingCompressedSize).width
+            let width = templateCell.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize).width
 			
 			if width > maxWidth {
 				maxWidth = width
@@ -842,7 +842,7 @@ extension CYBSDropDown {
 
 		let visibleWindow = window != nil ? window : UIWindow.visibleWindow()
 		visibleWindow?.addSubview(self)
-        visibleWindow?.bringSubview(toFront: self)
+        visibleWindow?.bringSubviewToFront(self)
 
 		self.translatesAutoresizingMaskIntoConstraints = false
 		visibleWindow?.addUniversalConstraints(format: "|[dropDown]|", views: ["dropDown": self])
@@ -878,7 +878,7 @@ extension CYBSDropDown {
 			completion: nil)
 
 		accessibilityViewIsModal = true
-        UIAccessibilityPostNotification(UIAccessibilityScreenChangedNotification, self)
+        UIAccessibility.post(notification: UIAccessibility.Notification.screenChanged, argument: self)
 
 		//deselectRows(at: selectedRowIndices)
 		selectRows(at: selectedRowIndices)
@@ -923,7 +923,7 @@ extension CYBSDropDown {
 
 				self.isHidden = true
 				self.removeFromSuperview()
-                UIAccessibilityPostNotification(UIAccessibilityScreenChangedNotification, nil)
+                UIAccessibility.post(notification: UIAccessibility.Notification.screenChanged, argument: nil)
 		})
 	}
 
@@ -1160,19 +1160,19 @@ extension CYBSDropDown {
 	}
 
 	fileprivate func startListeningToKeyboard() {
-		CYBSKeyboardListener.sharedInstance.startListeningToKeyboard()
-
-		NotificationCenter.default.addObserver(
-			self,
-			selector: #selector(keyboardUpdate),
-            name: NSNotification.Name.UIKeyboardWillShow,
-			object: nil)
-		NotificationCenter.default.addObserver(
-			self,
-			selector: #selector(keyboardUpdate),
-            name: NSNotification.Name.UIKeyboardWillHide,
-			object: nil)
-	}
+        CYBSKeyboardListener.sharedInstance.startListeningToKeyboard()
+        
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardUpdate),
+            name: UIResponder.keyboardWillShowNotification,
+            object: nil)
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardUpdate),
+            name: UIResponder.keyboardWillHideNotification,
+            object: nil)
+    }
 
 	fileprivate func stopListeningToNotifications() {
 		NotificationCenter.default.removeObserver(self)

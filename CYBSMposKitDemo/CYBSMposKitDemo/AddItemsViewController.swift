@@ -217,11 +217,12 @@ class AddItemsViewController: UIViewController, UITextFieldDelegate, UITableView
         self.itemsTableView.reloadData()
         self.calculateSubtotalAndItemCount()
     }
-    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
-        return UITableViewCellEditingStyle.delete
+    
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        return UITableViewCell.EditingStyle.delete
     }
     
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             self.removeItemAt(indexPath: indexPath as NSIndexPath)
         } else if (editingStyle == .insert) {

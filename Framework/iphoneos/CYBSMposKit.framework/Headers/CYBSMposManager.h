@@ -25,6 +25,7 @@
 #import "CYBSMposCardDataManual.h"
 #import "CYBSMposPurchaseDetails.h"
 #import "CYBSMposAuthorizationReversalRequest.h"
+#import "CYBSMposRegisterDeviceResponse.h"
 
 
 @protocol CYBSMposManagerDelegate;
@@ -292,7 +293,7 @@ typedef void (^OTAUpdateProgressBlock)(float iPercentage, CYBSMposOTAOperation i
 
 - (void)connectBTDeviceWithName:(nonnull NSString *)deviceName;
 
-- (void)disconenctBTDevice:(nullable id<CYBSMposManagerDelegate>)delegate;
+- (void)disconnectBTDevice:(nullable id<CYBSMposManagerDelegate>)delegate;
 
 // Audio/Microphone card reader related
 - (void)startAudio:(nullable id<CYBSMposManagerDelegate>)delegate;
@@ -366,6 +367,7 @@ typedef void (^OTAUpdateProgressBlock)(float iPercentage, CYBSMposOTAOperation i
 - (void)onBTConnected;
 - (void)onBTDisconnected;
 - (void)onRequestEnableBluetoothInSettings;
+- (void)powerDown;
 
 // Microphone/Audiojack Card Reader related
 - (void) onAudioDevicePlugged;
@@ -409,6 +411,8 @@ typedef void (^OTAUpdateProgressBlock)(float iPercentage, CYBSMposOTAOperation i
 
 - (void)onReceiptPrintDataCancelled;
 
-- (void)onDeviceRegister:(NSError *_Nonnull)responseData;
+- (void)onDeviceRegister:(nullable CYBSMposRegisterDeviceResponse *)responseData
+                   error:(nullable NSError *)error;
+
 
 @end

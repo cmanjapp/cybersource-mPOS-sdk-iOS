@@ -27,7 +27,7 @@ class HistoryTableViewController: UITableViewController, CYBSMposManagerDelegate
     self.refreshControl = UIRefreshControl()
     self.refreshControl?.backgroundColor = UIColor.white
     self.refreshControl?.tintColor = UIColor.gray
-    self.refreshControl?.addTarget(self, action: #selector(HistoryTableViewController.refresh), for: UIControlEvents.valueChanged)
+    self.refreshControl?.addTarget(self, action: #selector(HistoryTableViewController.refresh), for: UIControl.Event.valueChanged)
 
     dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
 
@@ -180,7 +180,7 @@ class HistoryTableViewController: UITableViewController, CYBSMposManagerDelegate
     }
   }
 
-  func refresh() {
+    @objc func refresh() {
     self.didRefresh = true
     getHistory()
   }

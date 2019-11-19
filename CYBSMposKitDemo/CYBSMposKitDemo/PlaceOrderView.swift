@@ -43,13 +43,13 @@ class PlaceOrderView: UIView, UIKeyInput, UITextFieldDelegate {
         if hasDecimal {
             if decimalSize < 2 {
                 let str = decimalLabel.text!.replacingCharacters(
-                    in: decimalLabel.text!.characters.index(decimalLabel.text!.startIndex, offsetBy: decimalSize)..<decimalLabel.text!.characters.index(decimalLabel.text!.startIndex, offsetBy: decimalSize + 1),
+                    in: decimalLabel.text!.index(decimalLabel.text!.startIndex, offsetBy: decimalSize)..<decimalLabel.text!.index(decimalLabel.text!.startIndex, offsetBy: decimalSize + 1),
                     with: text)
                 let attributed = NSMutableAttributedString(string: str)
-                attributed.addAttribute(NSForegroundColorAttributeName,
+                attributed.addAttribute(NSAttributedString.Key.foregroundColor,
                                         value: UIColor.black,
                                         range: NSRange(location: 0, length: decimalSize + 1))
-                attributed.addAttribute(NSForegroundColorAttributeName,
+                attributed.addAttribute(NSAttributedString.Key.foregroundColor,
                                         value: UIColor.lightGray,
                                         range: NSRange(location: decimalSize + 1, length: 2 - decimalSize - 1))
                 decimalLabel.attributedText = attributed
@@ -82,13 +82,13 @@ class PlaceOrderView: UIView, UIKeyInput, UITextFieldDelegate {
         if hasDecimal {
             decimalSize -= 1
             let str = decimalLabel.text!.replacingCharacters(
-                in: decimalLabel.text!.characters.index(decimalLabel.text!.startIndex, offsetBy: decimalSize)..<decimalLabel.text!.characters.index(decimalLabel.text!.startIndex, offsetBy: decimalSize + 1),
+                in: decimalLabel.text!.index(decimalLabel.text!.startIndex, offsetBy: decimalSize)..<decimalLabel.text!.index(decimalLabel.text!.startIndex, offsetBy: decimalSize + 1),
                 with: "0")
             let attributed = NSMutableAttributedString(string: str)
-            attributed.addAttribute(NSForegroundColorAttributeName,
+            attributed.addAttribute(NSAttributedString.Key.foregroundColor,
                                     value: UIColor.black,
                                     range: NSRange(location: 0, length: decimalSize))
-            attributed.addAttribute(NSForegroundColorAttributeName,
+            attributed.addAttribute(NSAttributedString.Key.foregroundColor,
                                     value: UIColor.lightGray,
                                     range: NSRange(location: decimalSize, length: 2 - decimalSize))
             decimalLabel.attributedText = attributed
@@ -97,12 +97,12 @@ class PlaceOrderView: UIView, UIKeyInput, UITextFieldDelegate {
                 hasDecimal = false
             }
         } else if !integerLabel.text!.isEmpty {
-            var text = integerLabel.text![integerLabel.text!.startIndex..<integerLabel.text!.characters.index(before: integerLabel.text!.endIndex)]
+            var text = integerLabel.text![integerLabel.text!.startIndex..<integerLabel.text!.index(before: integerLabel.text!.endIndex)]
             if text.isEmpty {
                 text = "0"
                 integerLabel.textColor = UIColor.lightGray
             }
-            integerLabel.text = text
+            integerLabel.text = String(text)
         }
         
         let amount = NSDecimalNumber(string: "\(integerLabel.text!).\(decimalLabel.text!)")

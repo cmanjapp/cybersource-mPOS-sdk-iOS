@@ -68,7 +68,7 @@ extension CYBSDropDownCell {
 			executeSelection()
 		}
 
-		accessibilityTraits = selected ? UIAccessibilityTraitSelected : UIAccessibilityTraitNone
+        accessibilityTraits = selected ? UIAccessibilityTraits.selected : UIAccessibilityTraits.none
 	}
 	
 }

@@ -91,7 +91,7 @@ class TransactionDetailTableViewController: UITableViewController, CYBSMposManag
 //            return 44
 //        }
         
-        return UITableViewAutomaticDimension
+        return UITableView.automaticDimension
     }
 
   override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -345,27 +345,27 @@ class TransactionDetailTableViewController: UITableViewController, CYBSMposManag
 
     switch actions[transaction!.transactionType]![(indexPath as NSIndexPath).row] {
     case .capture:
-        cell.button.setTitle("Capture", for: UIControlState())
+        cell.button.setTitle("Capture", for: UIControl.State())
         cell.button.isEnabled = canCapture()
         cell.button.tag = Int(CYBSMposTransactionActionType.capture.rawValue)
     case .refund:
-      cell.button.setTitle("Refund", for: UIControlState())
+        cell.button.setTitle("Refund", for: UIControl.State())
       cell.button.isEnabled = canRefund()
       cell.button.tag = Int(CYBSMposTransactionActionType.refund.rawValue)
     case .reverse:
-      cell.button.setTitle("Reverse", for: UIControlState())
+        cell.button.setTitle("Reverse", for: UIControl.State())
       cell.button.isEnabled = canReverse()
       cell.button.tag = Int(CYBSMposTransactionActionType.reverse.rawValue)
     case .void:
-      cell.button.setTitle("Void", for: UIControlState())
+        cell.button.setTitle("Void", for: UIControl.State())
       cell.button.isEnabled = canVoid()
       cell.button.tag = Int(CYBSMposTransactionActionType.void.rawValue)
     case .sendReceipt:
-      cell.button.setTitle("Send Receipt", for: UIControlState())
+        cell.button.setTitle("Send Receipt", for: UIControl.State())
       cell.button.isEnabled = canSendReceipt()
       cell.button.tag = Int(CYBSMposTransactionActionType.sendReceipt.rawValue)
     case .partialRefund:
-        cell.button.setTitle("Partial Refund", for: UIControlState())
+        cell.button.setTitle("Partial Refund", for: UIControl.State())
         cell.button.isEnabled = canRefund()
         cell.button.tag = Int(CYBSMposTransactionActionType.partialRefund.rawValue)
     default:
